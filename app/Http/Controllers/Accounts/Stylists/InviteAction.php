@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Accounts\Stylists;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Stylists\InviteStylistRequest;
 use App\Http\Responders\Stylists\InviteStylistResponder;
 
 use App\Domains\Models\Email\EmailAddress;
-use App\Domains\Models\Account\Stylist\Introduction;
+use App\Domains\Models\Account\Stylist\Recommendation;
 use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
 
 
@@ -37,8 +37,8 @@ class InviteAction extends Controller
         InviteStylistResponder $inviteStylistResponder
     ) {
         $email = new EmailAddress($request->email);
-        $introduction = new Introduction($request->introduction);
-        $token = $inviteStylistUseCase($email, $introduction);
+        $recommendation = new Recommendation($request->recommendation);
+        $token = $inviteStylistUseCase($email, $recommendation);
 
         return $inviteStylistResponder($token->value());
     }

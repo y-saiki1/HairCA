@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDislikesTable extends Migration
+class CreateHairColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDislikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dislikes', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->integer('style_book_id')->unsigned();
+        Schema::create('hair_colors', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateDislikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dislikes');
+        Schema::dropIfExists('hair_colors');
     }
 }

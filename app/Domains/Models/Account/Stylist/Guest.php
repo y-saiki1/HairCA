@@ -2,12 +2,12 @@
 
 namespace App\Domains\Models\Account\Stylist;
 
-use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\BaseAccount\AccountName;
 use App\Domains\Models\Email\EmailAddress;
 use App\Domains\Models\Hash;
+use App\Domains\Models\Account\Stylist\Recommendation;
 
-class Guest extends Account
+class Guest
 {
     /**
      * @var AccountName 招待者名
@@ -20,9 +20,9 @@ class Guest extends Account
     private $token;
 
     /**
-     * @var Introduction 紹介文
+     * @var Recommendation 推薦文
      */
-    private $introduction;
+    private $recommendation;
 
     /**
      * @param AccountName 送信者名
@@ -32,7 +32,7 @@ class Guest extends Account
     public function __construct(
         AccountName $inviterName,
         EmailAddress $emailAddress, 
-        Introduction $introduction
+        Recommendation $recommendation
     ) {
         // BaseAccount properties
         $this->inviterName = $inviterName;
@@ -40,18 +40,7 @@ class Guest extends Account
 
         // GuestAccount properties
         $this->token = new Hash(uniqid(rand(), true));
-        $this->introduction = $introduction;
-    }
-
-    /**
-     * @return array Guestの配列
-     */
-    public function toArray(): array
-    {
-        return [
-            'inviterName'  => $this->inviterName,
-            'emailAddress' => $this->emailAddress
-        ];
+        $this->recommendation = $recommendation;
     }
 
     /**

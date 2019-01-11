@@ -17,6 +17,8 @@ class CreateStyleBooksTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('style_book_repository_id')->unsigned();
+            $table->integer('hair_style_id')->unsigned();
+            $table->integer('hair_color_id')->unsigned();
             $table->string('name');
             $table->text('comment');
             $table->boolean('is_published');

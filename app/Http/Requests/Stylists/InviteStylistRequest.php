@@ -29,6 +29,7 @@ class InviteStylistRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
+            'recommendation' => 'required|string',
         ];
     }
 

@@ -7,7 +7,7 @@ use App\Domains\Models\BaseAccount\AccountId;
 use App\Domains\Models\BaseAccount\AccountName;
 use App\Domains\Models\BaseAccount\AccountPassword;
 use App\Domains\Models\Account\Stylist\Guest;
-use App\Domains\Models\Account\Stylist\Introduction;
+use App\Domains\Models\Account\Stylist\Recommendation;
 use App\Domains\Models\Email\EmailAddress;
 
 class Stylist extends Account
@@ -23,12 +23,12 @@ class Stylist extends Account
         ];
     }
 
-    public function inviteGuest(EmailAddress $emailAddress, Introduction $introduction): Guest
+    public function inviteGuest(EmailAddress $emailAddress, Recommendation $recommendation): Guest
     {
         return new Guest(
             $this->name,
             $emailAddress, 
-            $introduction
+            $recommendation
         );
     }
 }

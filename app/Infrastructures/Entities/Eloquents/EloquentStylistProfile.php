@@ -4,7 +4,7 @@ namespace App\Infrastructures\Entities\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentStylistProfiles extends Model
+class EloquentStylistProfile extends Model
 {
     /**
      * @var string

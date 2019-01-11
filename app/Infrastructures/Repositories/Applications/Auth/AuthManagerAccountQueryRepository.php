@@ -13,7 +13,7 @@ use App\Domains\Models\Account\Stylist\Guest;
 use App\Domains\Models\Email\EmailAddress;
 use App\Domains\Models\Hash;
 
-use App\Infrastructures\Entities\Eloquents\EloqeuntGuest;
+use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 
 class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
 {
@@ -30,7 +30,7 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
     /**
      * @param AuthManager Laravelの認証クラス
      */
-    public function __construct(AuthManager $authManager, EloqeuntGuest $eloquentGuest)
+    public function __construct(AuthManager $authManager, EloquentGuest $eloquentGuest)
     {
         $this->authManager = $authManager;
         $this->eloquentGuest = $eloquentGuest;
