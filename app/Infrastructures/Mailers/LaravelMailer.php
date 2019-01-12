@@ -4,7 +4,6 @@ namespace App\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
 
-use App\Domains\Models\Account\BaseAccount\AccountName;
 use App\Domains\Models\Account\Stylist\Guest;
 
 use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
@@ -33,12 +32,12 @@ class LaravelMailer implements MailerUseCaseCommand
     public function sendInvitationMail(Guest $guest): void
     {
         $inviteAccountMail = new InviteAccountMail(
-            $guest->inviterName()->value(),
-            $guest->token()->value()
+            $guest->inviter()->name(),
+            $guest->token()
         );
 
         $this->mailer
-            ->to($guest->emailAddress()->value())
+            ->to($guest->emailAddress())
             ->send($inviteAccountMail);
     }
 }

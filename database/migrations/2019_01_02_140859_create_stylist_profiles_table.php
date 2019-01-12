@@ -26,7 +26,7 @@ class CreateStylistProfilesTable extends Migration
             $table->string('hair_salon_prefecture');
             $table->string('hair_salon_municipality');
             $table->string('hair_salon_street_number');
-            $table->string('hair_salon_building_name');
+            $table->string('hair_salon_building_name')->nullable();
             $table->timestamps();
         });
     }

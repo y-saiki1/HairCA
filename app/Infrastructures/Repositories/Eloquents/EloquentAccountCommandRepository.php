@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Domains\Models\BaseAccount\Account;
-use App\Domains\Models\BaseAccount\AccountId;
 use App\Domains\Models\Account\Stylist\Guest;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
@@ -59,17 +58,16 @@ class EloquentAccountCommandRepository implements AccountUseCaseCommand
     }
 
     /**
-     * @param AccountId アカウントID
      * @param Guest ゲスト
      * @return bool
      */
-    public function saveGuest(AccountId $accountId, Guest $guest): bool
+    public function saveGuest(Guest $guest): bool
     {
         $guest = $this->eloquentGuest->firstOrNew([
-                'user_id'      => $accountId->value(),
-                'email'        => $guest->emailAddress()->value(),
-                'token'        => $guest->token()->value(),
-                'introduction' => $guest->introduction()->value(),
+                'user_id'        => $guest->inviter()->id(),
+                'email'          => $guest->emailAddress(),
+                'token'          => $guest->token(),
+                'recommendation' => $guest->recommendation(),
         ]);
 
         if (! $guest->wasRecentlyCreated) {

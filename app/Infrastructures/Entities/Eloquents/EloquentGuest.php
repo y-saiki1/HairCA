@@ -4,6 +4,9 @@ namespace App\Infrastructures\Entities\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Domains\Models\Account\Stylist\Stylist;
+use App\Domains\Models\Account\Stylist\Guest;
+
 class EloquentGuest extends Model
 {
     /**
@@ -15,13 +18,21 @@ class EloquentGuest extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'email', 'token', 'introduction'
+        'user_id', 'email', 'token', 'recommendation'
     ];
 
-    public function toDomain():Guest
+    public function inviter(): Stylist
+    {
+        $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentUser', 'user_id')->first();
+        return $stylist->toDomain();
+    }
+
+    public function toDomain(): Guest
     {
         return new Guest(
-            
+            $this->inviter(),
+            $this->email,
+            $this->recommendation
         );
     }
 }

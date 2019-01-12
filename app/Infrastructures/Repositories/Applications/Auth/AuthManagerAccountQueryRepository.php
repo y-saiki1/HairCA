@@ -7,12 +7,11 @@ use Illuminate\Auth\AuthManager;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
 use App\Domains\Models\BaseAccount\Account;
-use App\Domains\Models\BaseAccount\AccountPassword;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\Guest;
-use App\Domains\Models\Email\EmailAddress;
 use App\Domains\Models\Hash;
 
+use App\Infrastructures\Entities\Eloquents\EloquentUser;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 
 class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
@@ -23,16 +22,24 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
     private $authManager;
 
     /**
+     * @var EloqeuntUser Eloqeuntユーザー
+     */
+    private $eloquentUser;
+
+    /**
      * @var EloqeuntGuest Eloqeuntゲスト
      */
     private $eloquentGuest;
 
     /**
      * @param AuthManager Laravelの認証クラス
+     * @param EloquentUser eloquentUser
+     * @param EloquentGuest eloquentGuest
      */
-    public function __construct(AuthManager $authManager, EloquentGuest $eloquentGuest)
+    public function __construct(AuthManager $authManager, EloquentUser $eloquentUser, EloquentGuest $eloquentGuest)
     {
         $this->authManager = $authManager;
+        $this->eloquentUser = $eloquentUser;
         $this->eloquentGuest = $eloquentGuest;
     }
 
@@ -41,13 +48,13 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
      * @param AccountPassword アカウントのパスワード
      * @return mixed string JWTトークン | bool false ログイン失敗
      */
-    public function login(EmailAddress $emailAddress, AccountPassword $password)
+    public function login(string $emailAddress, string $password)
     {
         return $this->authManager
             ->guard('api')
             ->attempt([
-                'email'    => $emailAddress->value(),
-                'password' => $password->value(),
+                'email'    => $emailAddress,
+                'password' => $password,
             ]);
     }
 
@@ -69,13 +76,27 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
      * @param Hash 招待トークン
      * @return Guest ゲスト
      */
-    public function findGuestByEmailAndToken(EmailAddress $emailAddress, Hash $invitationToken): Guest
+    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): ?Guest
     {
         $guest = $this->eloquentGuest
-            ->where('email', $emailAddress->value())
-            ->where('token', $invitationToken->value())
-            ->get();
+            ->where('email', $emailAddress)
+            ->where('token', $invitationToken)
+            ->first();
 
-        return $guest->toDoamin();
+        return $guest ? $guest->toDomain() : null;
+    }
+
+    /**
+     * メールアドレスでアカウントを取得。なければNullを返す
+     * @param string メールアドレス
+     * @return Account AccountInterfaceを継承したクラス（Stylist or Member）
+     */
+    public function findAccountByEmailAddress(string $emailAddress): ?Account
+    {
+        $account =  $this->eloquentUser
+            ->where('email', $emailAddress)
+            ->first();
+            
+        return $account ? $account->toDomain() : null;
     }
 }

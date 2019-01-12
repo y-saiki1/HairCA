@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AuthenticateInvitationTokenRequest extends FormRequest
+class AuthenticateInvitationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,8 @@ class AuthenticateInvitationTokenRequest extends FormRequest
     public function rules()
     {
         return [
+            'email'            => 'required|max:255|email|exists:guests,email',
             'invitation_token' => 'required|exists:guests,token',
-            'email' => 'required|max:255|email|exists:guests,email',
         ];
     }
 }

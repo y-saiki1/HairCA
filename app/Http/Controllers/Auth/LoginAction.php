@@ -12,8 +12,6 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Responders\TokenResponder;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
-use App\Domains\Models\BaseAccount\AccountPassword;
-use App\Domains\Models\Email\EmailAddress;
 
 class LoginAction extends Controller
 {
@@ -52,8 +50,8 @@ class LoginAction extends Controller
     ): JsonResponse
     {
         $token = $accountUseCaseQuery->login(
-            new EmailAddress($request->email),
-            new AccountPassword($request->password)
+            $request->email,
+            $request->password
         );
         
         return $responder(

@@ -7,10 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Domains\Models\BaseAccount\Account;
-use App\Domains\Models\BaseAccount\AccountId;
-use App\Domains\Models\BaseAccount\AccountName;
-use App\Domains\Models\BaseAccount\AccountType;
-use App\Domains\Models\Email\EmailAddress;
+use App\Domains\Models\Account\Stylist\Stylist;
+use App\Domains\Models\Account\Stylist\StylistProfile;
 
 class EloquentUser extends Authenticatable implements JWTSubject
 {
@@ -56,18 +54,30 @@ class EloquentUser extends Authenticatable implements JWTSubject
     }
 
     /**
+     * 1対１ スタイリストのプロフィール取得
+     * @return StylistProfile
+     */
+    public function stylistProfile(): StylistProfile
+    {
+        $stylistProfile = $this->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')->first();
+        return $stylistProfile->toDomain();
+    }
+
+    /**
      * アカウントインターフェイスを継承したドメインモデルを返却する
      * @return Account Stylist, Member
      */
     public function toDomain(): Account
     {
-        $account = new Account(
-            new AccountId($this->id),
-            new AccountName($this->name),
-            new EmailAddress($this->email),
-            new AccountType($this->role_id)
-        );
-
-        return $account->getAccountType();
+        if ($this->role_id === Stylist::ACCOUNT_TYPE) {
+            $account = new Stylist(
+                $this->id,
+                $this->name,
+                $this->email,
+                $this->stylistProfile()
+            );
+        }
+        
+        return $account;
     }
 }

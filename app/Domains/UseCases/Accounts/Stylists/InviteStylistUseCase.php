@@ -7,8 +7,7 @@ use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
 
 use App\Domains\Models\Hash;
-use App\Domains\Models\Email\EmailAddress;
-use App\Domains\Models\Account\Stylist\Recommendation;
+use App\Domains\Models\Account\Stylist\StylistProfile\Recommendation;
 
 class InviteStylistUseCase
 {
@@ -44,16 +43,16 @@ class InviteStylistUseCase
 
     /**
      * ユーザーに招待メールを送る。トークン作成・保存・メール送信。
-     * @param EmailAddress メールアドレス
+     * @param string メールアドレス
+     * @param string 推薦文
      * @return InvitationToken 招待トークン
      */
-    public function __invoke(EmailAddress $emailAddress, Recommendation $recommendation): Hash
+    public function __invoke(string $emailAddress, string $recommendation): string
     {
         $stylist = $this->accountQuery->myAccount();
         $guest = $stylist->inviteGuest($emailAddress, $recommendation);
-        dd($guest);
 
-        $isSaved = $this->accountCommand->saveGuest($stylist->id(), $guest);
+        $isSaved = $this->accountCommand->saveGuest($guest);
         $this->emailCommand->sendInvitationMail($guest);
 
         return $guest->token();

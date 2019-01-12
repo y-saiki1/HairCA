@@ -3,7 +3,6 @@
 namespace App\Domains\UseCases\Accounts;
 
 use App\Domains\Models\BaseAccount\Account;
-use App\Domains\Models\BaseAccount\AccountId;
 use App\Domains\Models\Account\Stylist\Guest;
 
 interface AccountUseCaseCommand
@@ -15,9 +14,8 @@ interface AccountUseCaseCommand
     public function save(Guest $guest): Account;
 
     /**
-     * @param AccountId アカウントID
      * @param Guest ゲスト
      * @return bool
      */
-    public function saveGuest(AccountId $accountId, Guest $guest): bool;
+    public function saveGuest(Guest $guest): bool;
 }
