@@ -21,7 +21,7 @@ class EloquentGuest extends Model
         'user_id', 'email', 'token', 'recommendation'
     ];
 
-    public function inviter(): Stylist
+    public function recommender(): Stylist
     {
         $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentUser', 'user_id')->first();
         return $stylist->toDomain();
@@ -30,7 +30,7 @@ class EloquentGuest extends Model
     public function toDomain(): Guest
     {
         return new Guest(
-            $this->inviter(),
+            $this->recommender(),
             $this->email,
             $this->recommendation
         );

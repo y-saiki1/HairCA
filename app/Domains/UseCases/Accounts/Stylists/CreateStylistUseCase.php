@@ -2,12 +2,6 @@
 
 namespace App\Domains\UseCases\Accounts\Stylists;
 
-use App\Domains\Models\Account\Guest;
-use App\Domains\Models\Account\Stylist\Stylist;
-use App\Domains\Models\BaseAccount\AccountName;
-use App\Domains\Models\BaseAccount\AccountPassword;
-use App\Domains\Models\Email\EmailAddress;
-
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
@@ -25,28 +19,31 @@ class CreateStylistUseCase
 
     /**
      * @param AccountUseCaseCommand アカウント操作UseCase
+     * @param AccountUseCaseQuery アカウント取得UseCase
      */
-    public function __construct(
-        AccountUseCaseCommand $accountCommand,
-        AccountUseCaseQuery $accountQuery
-    ) {
+    public function __construct(AccountUseCaseCommand $accountCommand, AccountUseCaseQuery $accountQuery)
+    {
         $this->accountCommand = $accountCommand;
         $this->accountQuery = $accountQuery;
     }
 
     /**
-     * @param Guest ゲストアカウント
+     * @param string アカウント名
+     * @param string メールアドレス
+     * @param string パスワード
+     * @param string 招待トークン
+     * @return mixed bool false | null ログイン失敗 | JsonWebToken jwt返却
      */
-    public function __invoke(Guest $guest)
-    {
-        $account = $this->accountCommand->save($guest);
+    public function __invoke(
+        string $name,
+        string $emailAddress,
+        string $password,
+        string $invitationToken
+    ) {
+        $guest = $this->accountQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
+        $isSaved = $this->accountCommand->saveStylist($name, $guest->emailAddress(), $password);
+        if (! $isSaved) return false;
 
-        if (! $isSaved) return;
-        
-        $this->accountQuery->login(
-            $account->emailAddress(),
-            $account->password()
-        );
-        
+        return $this->accountQuery->login($guest->emailAddress(), $password);
     }
 }

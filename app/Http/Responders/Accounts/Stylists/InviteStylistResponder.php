@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Responders\Stylists;
+namespace App\Http\Responders\Accounts\Stylists;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -17,7 +17,7 @@ class InviteStylistResponder
         if (! $invitationToken) {
             return new JsonResponse(
                 [
-                    'message' => 'failed to send invite mail',
+                    'message' => 'Failed to send invite mail',
                 ], 
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );

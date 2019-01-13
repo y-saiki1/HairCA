@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Stylists;
+namespace App\Http\Requests\Accounts\Stylists;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-use App\Http\Responders\Stylists\InviteStylistResponder;
 
 class InviteStylistRequest extends FormRequest
 {
@@ -28,18 +26,8 @@ class InviteStylistRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            'recommendation' => 'required|string',
+            'email'          => 'required|email|unique:users,email',
+            'recommendation' => 'required|max:600',
         ];
     }
-
-    // /**
-    //  * バリデーション失敗時、json返却
-    //  * @param Validator
-    //  */
-    // protected function failedValidation(Validator $validator)
-    // {
-    //     $responder = \App::make(InviteStylistResponder::class);
-    //     throw new HttpResponseException($responder(false));
-    // }
 }

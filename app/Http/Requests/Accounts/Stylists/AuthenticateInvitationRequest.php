@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Stylists;
+namespace App\Http\Requests\Accounts\Stylists;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -27,7 +27,7 @@ class AuthenticateInvitationRequest extends FormRequest
     {
         return [
             'email'            => 'required|max:255|email|exists:guests,email',
-            'invitation_token' => 'required|exists:guests,token',
+            'invitation_token' => 'required|max:255|exists:guests,token',
         ];
     }
 }

@@ -10,6 +10,7 @@ use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\Guest;
 use App\Domains\Models\Hash;
+use App\Domains\Models\JWT\JsonWebToken;
 
 use App\Infrastructures\Entities\Eloquents\EloquentUser;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
@@ -44,18 +45,20 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
     }
 
     /**
-     * @param EmailAddress メールアドレス
-     * @param AccountPassword アカウントのパスワード
-     * @return mixed string JWTトークン | bool false ログイン失敗
+     * @param string メールアドレス
+     * @param string アカウントのパスワード
+     * @return mixed string JWTトークン | null ログイン失敗
      */
     public function login(string $emailAddress, string $password)
     {
-        return $this->authManager
+        $token = $this->authManager
             ->guard('api')
             ->attempt([
                 'email'    => $emailAddress,
                 'password' => $password,
             ]);
+
+        return $token ? new JsonWebToken($token) : null;
     }
 
     /**
@@ -72,8 +75,8 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
 
     /**
      * メールアドレスと招待トークンでGuestユーザー（招待されたユーザー）を検索し、Guestを返す
-     * @param EmailAddress $email
-     * @param Hash 招待トークン
+     * @param string $email
+     * @param string 招待トークン
      * @return Guest ゲスト
      */
     public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): ?Guest

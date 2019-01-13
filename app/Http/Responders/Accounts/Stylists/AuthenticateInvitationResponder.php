@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Responders\Stylists;
+namespace App\Http\Responders\Accounts\Stylists;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -17,7 +17,7 @@ class AuthenticateInvitationResponder
     {
         return new JsonResponse(
             [
-                'message'    => 'The Guest to have this Email and Token is ' . $account->accountTypeName(),
+                'message'    => 'The Guest that have this Email and Token is ' . $account->accountTypeName(),
                 'is_guest'   => $account->isGuest(),
                 'is_stylist' => $account->isStylist(),
                 'is_member'  => $account->isMember(),

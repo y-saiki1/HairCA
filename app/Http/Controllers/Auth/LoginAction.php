@@ -9,7 +9,7 @@ use Tymon\JWTAuth\JWTGuard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Responders\TokenResponder;
+use App\Http\Responders\Auth\TokenResponder;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
@@ -49,15 +49,11 @@ class LoginAction extends Controller
         AccountUseCaseQuery $accountUseCaseQuery
     ): JsonResponse
     {
-        $token = $accountUseCaseQuery->login(
+        $jwt = $accountUseCaseQuery->login(
             $request->email,
             $request->password
         );
         
-        return $responder(
-            $token,
-            60 * 60
-            // $guard->factory()->getTTL() * 60
-        );
+        return $responder($jwt);
     }
 }

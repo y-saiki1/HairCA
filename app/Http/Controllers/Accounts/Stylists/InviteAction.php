@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Accounts\Stylists;
 
-use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Stylists\InviteStylistRequest;
-use App\Http\Responders\Stylists\InviteStylistResponder;
 
+use App\Http\Requests\Accounts\Stylists\InviteStylistRequest;
 use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
+use App\Http\Responders\Accounts\Stylists\InviteStylistResponder;
 
 class InviteAction extends Controller
 {

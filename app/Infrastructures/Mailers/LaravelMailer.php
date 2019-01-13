@@ -32,7 +32,7 @@ class LaravelMailer implements MailerUseCaseCommand
     public function sendInvitationMail(Guest $guest): void
     {
         $inviteAccountMail = new InviteAccountMail(
-            $guest->inviter()->name(),
+            $guest->recommender()->name(),
             $guest->token()
         );
 

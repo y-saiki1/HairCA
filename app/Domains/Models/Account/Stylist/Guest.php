@@ -19,7 +19,7 @@ class Guest implements Account
     /**
      * @var Stylist 招待者
      */
-    private $inviter;
+    private $recommender;
 
     /**
      * @var string 招待されるメールアドレス
@@ -42,11 +42,11 @@ class Guest implements Account
      * @param Introduction 紹介文
      */
     public function __construct(
-        Stylist $inviter,
+        Stylist $recommender,
         string $emailAddress,
         string $recommendation
     ) {
-        $this->inviter = $inviter;
+        $this->recommender = $recommender;
         $this->emailAddress = $emailAddress;
         $this->recommendation = $recommendation;
 
@@ -72,9 +72,9 @@ class Guest implements Account
     /**
      * @return string 招待者
      */
-    public function inviter(): Stylist
+    public function recommender(): Stylist
     {
-        return $this->inviter;
+        return $this->recommender;
     }
 
     /**
