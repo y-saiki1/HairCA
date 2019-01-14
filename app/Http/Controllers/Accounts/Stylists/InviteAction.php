@@ -11,7 +11,10 @@ use App\Http\Responders\Accounts\Stylists\InviteStylistResponder;
 class InviteAction extends Controller
 {
     /**
-     * @bodyParam email string required 招待されるユーザーのメールアドレス Example: example@exam.com
+     * スタイリスト招待
+     * 現在ログインしているスタイリストアカウントで招待メールを送る。
+     * @bodyParam email string required 招待するユーザーのメールアドレス Example: example@exam.com
+     * @bodyParam recommendation string required 推薦文 Example: Laravelのドキュメント自動生成ツールまじで優秀
      * @response 204 {}
      * @response 400 {
      *  "message":"The given data was invalid.",
@@ -29,13 +32,13 @@ class InviteAction extends Controller
     public function __invoke(
         InviteStylistRequest $request,
         InviteStylistUseCase $inviteStylistUseCase,
-        InviteStylistResponder $inviteStylistResponder
+        InviteStylistResponder $responder
     ) {
         $token = $inviteStylistUseCase(
             $request->email, 
             $request->recommendation
         );
 
-        return $inviteStylistResponder($token);
+        return $responder($token);
     }
 }

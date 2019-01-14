@@ -16,15 +16,15 @@ class UserSeeder extends Seeder
     {
         $user->create([
             'role_id'   => 1,
-            'name'      => 'ore',
-            'email'     => 'ore@ore.com',
+            'name'      => '伊藤カイジ',
+            'email'     => 'kaiji@ore.com',
             'password'  => $hasher->make('password'),
         ]);
 
         $user->create([
             'role_id'   => 1,
-            'name'      => 'saiki',
-            'email'     => 'saiki@ore.com',
+            'name'      => '遠藤勇次',
+            'email'     => 'endou@ore.com',
             'password'  => $hasher->make('password'),
         ]);
     }

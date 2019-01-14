@@ -11,8 +11,24 @@ use App\Http\Responders\Auth\TokenResponder;
 class CreateAction extends Controller
 {
     /**
+     * スタイリスト作成
+     * アカウントに使う基本情報とスタイリストとしてこのアプリケーションにに登録する。スタイリストのプロフィール作成APIではない。
+     * @bodyParam name string required アカウント名 Example: アカウント名
+     * @bodyParam email string required ログインするアカウントのメールアドレス Example: example@exam.com
+     * @bodyParam password string required パスワード Example: password
+     * @bodyParam password_confirmation string required 確認パスワード Example: password
+     * @bodyParam invitation_token string required 招待トークン Example: token
+     * @response 200 {
+     *  "access_token": "token",
+     *  "token_type": "bearer",
+     *  "expires_in": 3600
+     * }
+     * @response 400 {
+     *  "message": "UnAuthorized"
+     * }
      * @param CreateStylistRequest アカウント作成リクエスト
-     * @param UseCase
+     * @param CreateStylistUseCase アカウント作成ユースケース
+     * @param TokenResponder トークンレスポンス
      */
     public function __invoke(
         CreateStylistRequest $request,

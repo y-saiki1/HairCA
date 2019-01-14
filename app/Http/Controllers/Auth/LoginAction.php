@@ -29,6 +29,8 @@ class LoginAction extends Controller
     }
 
     /**
+     * ユーザーログイン
+     * ログインする場合は以下のパラメータを用意すること
      * @bodyParam email string required ログインするアカウントのメールアドレス Example: example@exam.com
      * @bodyParam password string required ログインするアカウントのパスワード Example: password
      * @response 200 {
@@ -37,7 +39,7 @@ class LoginAction extends Controller
      *  "expires_in": 3600
      * }
      * @response 400 {
-     *  "message": ""
+     *  "message": "UnAuthorized"
      * }
      * @param LoginRequest
      * @param TokenResponder

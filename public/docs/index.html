@@ -50,7 +50,8 @@
 <!-- END_INFO -->
 <h1>general</h1>
 <!-- START_a925a8d22b3615f12fca79456d286859 -->
-<h2>api/auth/login</h2>
+<h2>ユーザーログイン</h2>
+<p>ログインする場合は以下のパラメータを用意すること</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -84,10 +85,10 @@ fetch(url, {
     "expires_in": 3600
 }</code></pre>
 <blockquote>
-<p>Example response (401):</p>
+<p>Example response (400):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Unauthrized"
+    "message": "UnAuthorized"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/auth/login</code></p>
@@ -117,13 +118,15 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_a925a8d22b3615f12fca79456d286859 -->
-<!-- START_94726cef0a53b660e0f38207f65ad3e6 -->
-<h2>api/auth/invite</h2>
+<!-- START_1b3e3725dd2384ba7c12a125584307a3 -->
+<h2>スタイリスト招待</h2>
+<p>現在ログインしているスタイリストアカウントで招待メールを送る。</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/auth/invite"     -d "email"="example@exam.com" </code></pre>
-<pre><code class="language-javascript">const url = new URL("http://localhost/api/auth/invite");
+<pre><code class="language-bash">curl -X POST "http://localhost/api/accounts/stylists/invite"     -d "email"="example@exam.com" \
+    -d "recommendation"="Laravelのドキュメント自動生成ツールまじで優秀" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/accounts/stylists/invite");
 
 let headers = {
     "Accept": "application/json",
@@ -132,6 +135,7 @@ let headers = {
 
 let body = JSON.stringify({
     "email": "example@exam.com",
+    "recommendation": "Laravelのドキュメント自動生成ツールまじで優秀",
 })
 
 fetch(url, {
@@ -149,10 +153,21 @@ fetch(url, {
 <p>Example response (400):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "failed to send invite mail"
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "The email must be a valid email address."
+        ]
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "failed to send invite mail"
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>POST api/auth/invite</code></p>
+<p><code>POST api/accounts/stylists/invite</code></p>
 <h4>Body Parameters</h4>
 <table>
 <thead>
@@ -168,11 +183,171 @@ fetch(url, {
 <td>email</td>
 <td>string</td>
 <td>required</td>
-<td>招待されるユーザーのメールアドレス</td>
+<td>招待するユーザーのメールアドレス</td>
+</tr>
+<tr>
+<td>recommendation</td>
+<td>string</td>
+<td>required</td>
+<td>推薦文</td>
 </tr>
 </tbody>
 </table>
-<!-- END_94726cef0a53b660e0f38207f65ad3e6 -->
+<!-- END_1b3e3725dd2384ba7c12a125584307a3 -->
+<!-- START_1e69046fec63f90d27faf177eae66349 -->
+<h2>招待メール認証</h2>
+<p>招待トークンと招待したメールアドレスが一致しているか判定し、一致していればメッセージと現在の自分のアカウントのタイプを返す。</p>
+<p>招待メールが既にスタイリストか一般会員で登録されていた場合は is_member か is_stylist が true になる。ゲスト（アカウント持ってない）だった場合は is_guest が true になる。</p>
+<p>３つの内どれか一つがtrueだった場合は他はfalseになる。</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/accounts/stylists/auth"     -d "email"="example@exam.com" \
+    -d "invitation_token"="token" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/accounts/stylists/auth");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+let body = JSON.stringify({
+    "email": "example@exam.com",
+    "invitation_token": "token",
+})
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/accounts/stylists/auth</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+<td>招待メールを送ったメアド</td>
+</tr>
+<tr>
+<td>invitation_token</td>
+<td>string</td>
+<td>required</td>
+<td>招待メールに付いてくるトークン</td>
+</tr>
+</tbody>
+</table>
+<!-- END_1e69046fec63f90d27faf177eae66349 -->
+<!-- START_fe4538154eb1c4d5a122a259d9a295b1 -->
+<h2>スタイリスト作成</h2>
+<p>アカウントに使う基本情報とスタイリストとしてこのアプリケーションにに登録する。スタイリストのプロフィール作成APIではない。</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/accounts/stylists"     -d "name"="アカウント名" \
+    -d "email"="example@exam.com" \
+    -d "password"="password" \
+    -d "password_confirmation"="password" \
+    -d "invitation_token"="token" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/accounts/stylists");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+let body = JSON.stringify({
+    "name": "アカウント名",
+    "email": "example@exam.com",
+    "password": "password",
+    "password_confirmation": "password",
+    "invitation_token": "token",
+})
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "access_token": "token",
+    "token_type": "bearer",
+    "expires_in": 3600
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "UnAuthorized"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/accounts/stylists</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+<td>アカウント名</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+<td>ログインするアカウントのメールアドレス</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>required</td>
+<td>パスワード</td>
+</tr>
+<tr>
+<td>password_confirmation</td>
+<td>string</td>
+<td>required</td>
+<td>確認パスワード</td>
+</tr>
+<tr>
+<td>invitation_token</td>
+<td>string</td>
+<td>required</td>
+<td>招待トークン</td>
+</tr>
+</tbody>
+</table>
+<!-- END_fe4538154eb1c4d5a122a259d9a295b1 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">
