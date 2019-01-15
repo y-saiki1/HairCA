@@ -29,8 +29,14 @@ class LoginAction extends Controller
     }
 
     /**
+     * Login
+     * 
      * ユーザーログイン
+     * 
      * ログインする場合は以下のパラメータを用意すること
+     * 
+     * @group Auth
+     * 
      * @bodyParam email string required ログインするアカウントのメールアドレス Example: example@exam.com
      * @bodyParam password string required ログインするアカウントのパスワード Example: password
      * @response 200 {

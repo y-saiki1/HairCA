@@ -2,8 +2,6 @@
 
 namespace App\Domains\UseCases\Accounts\Stylists;
 
-use App\Exceptions\NotExistsException;
-
 use App\Domains\Models\BaseAccount\Account;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
@@ -29,7 +27,6 @@ class AuthenticateInvitationUseCase
     public function __invoke(string $emailAddress, string $invitationToken): Account
     {
         $guest = $this->accountUseCaseQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
-        if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email and Token');
 
         $account = $this->accountUseCaseQuery->findAccountByEmailAddress($guest->emailAddress());
         return $account ? $account : $guest;

@@ -15,12 +15,16 @@ use App\Domains\Models\Hash;
 class AuthenticateInvitationAction extends Controller
 {
     /**
-     * 招待メール認証
-     * 招待トークンと招待したメールアドレスが一致しているか判定し、一致していればメッセージと現在の自分のアカウントのタイプを返す。
-     *
-     *  招待メールが既にスタイリストか一般会員で登録されていた場合は is_member か is_stylist が true になる。ゲスト（アカウント持ってない）だった場合は is_guest が true になる。
+     * Authenticate invitation
      * 
+     * 招待メール認証
+     * 
+     * 招待トークンと招待したメールアドレスが一致しているか判定し、一致していればメッセージと現在の自分のアカウントのタイプを返す。
+     * 招待メールが既にスタイリストか一般会員で登録されていた場合は is_member か is_stylist が true になる。ゲスト（アカウント持ってない）だった場合は is_guest が true になる。
      * ３つの内どれか一つがtrueだった場合は他はfalseになる。
+     * 
+     * @group Stylist
+     * 
      * @bodyParam email string required 招待メールを送ったメアド Example: example@exam.com
      * @bodyParam invitation_token string required 招待メールに付いてくるトークン Example: token
      * @response 200 {

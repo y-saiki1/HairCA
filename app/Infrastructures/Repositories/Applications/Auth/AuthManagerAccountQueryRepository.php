@@ -3,6 +3,7 @@
 namespace App\Infrastructures\Repositories\Applications\Auth;
 
 use Illuminate\Auth\AuthManager;
+use App\Exceptions\NotExistsException;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
@@ -47,9 +48,9 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
     /**
      * @param string メールアドレス
      * @param string アカウントのパスワード
-     * @return mixed string JWTトークン | null ログイン失敗
+     * @return JsonWebToken JWTトークン
      */
-    public function login(string $emailAddress, string $password)
+    public function login(string $emailAddress, string $password): JsonWebToken
     {
         $token = $this->authManager
             ->guard('api')
@@ -57,8 +58,11 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
                 'email'    => $emailAddress,
                 'password' => $password,
             ]);
+            
+        // tymon/jwt-authの例外をキャッチする必要あり。attemptではなく別のメソッドを探すべき
+        if (! $token) throw new NotExistsException('Failed to login');
 
-        return $token ? new JsonWebToken($token) : null;
+        return new JsonWebToken($token);
     }
 
     /**
@@ -79,27 +83,31 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
      * @param string 招待トークン
      * @return Guest ゲスト
      */
-    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): ?Guest
+    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest
     {
         $guest = $this->eloquentGuest
             ->where('email', $emailAddress)
             ->where('token', $invitationToken)
             ->first();
 
-        return $guest ? $guest->toDomain() : null;
+        if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email and Token');
+
+        return $guest->toDomain();
     }
 
     /**
-     * メールアドレスでアカウントを取得。なければNullを返す
+     * メールアドレスでアカウントを取得。
      * @param string メールアドレス
      * @return Account AccountInterfaceを継承したクラス（Stylist or Member）
      */
-    public function findAccountByEmailAddress(string $emailAddress): ?Account
+    public function findAccountByEmailAddress(string $emailAddress): Account
     {
         $account =  $this->eloquentUser
             ->where('email', $emailAddress)
             ->first();
-            
-        return $account ? $account->toDomain() : null;
+
+        if (! $account) throw new NotExistsException('An Account that have this Email is not exists');
+
+        return $account->toDomain();
     }
 }

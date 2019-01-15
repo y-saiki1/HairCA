@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+use App\Exceptions\StylistProfileNotExistsException;
+
 use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\StylistProfile;
@@ -57,9 +59,14 @@ class EloquentUser extends Authenticatable implements JWTSubject
      * 1対１ スタイリストのプロフィール取得
      * @return StylistProfile
      */
-    public function stylistProfile(): StylistProfile
+    public function myStylistProfile(): ?StylistProfile
     {
-        $stylistProfile = $this->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')->first();
+        $stylistProfile = $this
+            ->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')
+            ->first();
+
+        if (! $stylistProfile) throw new StylistProfileNotExistsException('This Account do not have a profile');
+
         return $stylistProfile->toDomain();
     }
 
@@ -74,7 +81,7 @@ class EloquentUser extends Authenticatable implements JWTSubject
                 $this->id,
                 $this->name,
                 $this->email,
-                $this->stylistProfile()
+                $this->myStylistProfile()
             );
         }
         

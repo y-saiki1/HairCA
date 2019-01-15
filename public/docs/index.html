@@ -48,9 +48,10 @@
 <p>Welcome to the generated API reference.
 <a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
 <!-- END_INFO -->
-<h1>general</h1>
+<h1>Auth</h1>
 <!-- START_a925a8d22b3615f12fca79456d286859 -->
-<h2>ユーザーログイン</h2>
+<h2>Login</h2>
+<p>ユーザーログイン</p>
 <p>ログインする場合は以下のパラメータを用意すること</p>
 <blockquote>
 <p>Example request:</p>
@@ -118,8 +119,10 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_a925a8d22b3615f12fca79456d286859 -->
+<h1>Stylist</h1>
 <!-- START_1b3e3725dd2384ba7c12a125584307a3 -->
-<h2>スタイリスト招待</h2>
+<h2>Invite Stylist</h2>
+<p>スタイリスト招待</p>
 <p>現在ログインしているスタイリストアカウントで招待メールを送る。</p>
 <blockquote>
 <p>Example request:</p>
@@ -195,10 +198,11 @@ fetch(url, {
 </table>
 <!-- END_1b3e3725dd2384ba7c12a125584307a3 -->
 <!-- START_1e69046fec63f90d27faf177eae66349 -->
-<h2>招待メール認証</h2>
-<p>招待トークンと招待したメールアドレスが一致しているか判定し、一致していればメッセージと現在の自分のアカウントのタイプを返す。</p>
-<p>招待メールが既にスタイリストか一般会員で登録されていた場合は is_member か is_stylist が true になる。ゲスト（アカウント持ってない）だった場合は is_guest が true になる。</p>
-<p>３つの内どれか一つがtrueだった場合は他はfalseになる。</p>
+<h2>Authenticate invitation</h2>
+<p>招待メール認証</p>
+<p>招待トークンと招待したメールアドレスが一致しているか判定し、一致していればメッセージと現在の自分のアカウントのタイプを返す。
+招待メールが既にスタイリストか一般会員で登録されていた場合は is_member か is_stylist が true になる。ゲスト（アカウント持ってない）だった場合は is_guest が true になる。
+３つの内どれか一つがtrueだった場合は他はfalseになる。</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -256,7 +260,8 @@ fetch(url, {
 </table>
 <!-- END_1e69046fec63f90d27faf177eae66349 -->
 <!-- START_fe4538154eb1c4d5a122a259d9a295b1 -->
-<h2>スタイリスト作成</h2>
+<h2>Create Stylist</h2>
+<p>スタイリスト作成</p>
 <p>アカウントに使う基本情報とスタイリストとしてこのアプリケーションにに登録する。スタイリストのプロフィール作成APIではない。</p>
 <blockquote>
 <p>Example request:</p>

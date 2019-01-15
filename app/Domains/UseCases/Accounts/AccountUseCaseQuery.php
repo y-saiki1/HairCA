@@ -14,7 +14,7 @@ interface AccountUseCaseQuery
      * @param AccountPassword アカウントのパスワード
      * @return mixed string トークン | bool false ログイン失敗
      */
-    public function login(string $emailAddress, string $password);
+    public function login(string $emailAddress, string $password): JsonWebToken;
 
     /**
      * アプリケーションにログインしたアカウントを取得する
@@ -28,12 +28,12 @@ interface AccountUseCaseQuery
      * @param Hash 招待トークン
      * @return Guest ゲスト
      */
-    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): ?Guest;
+    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest;
 
     /**
      * メールアドレスでアカウントを取得。なければNullを返す
      * @param string メールアドレス
      * @return Account AccountInterfaceを継承したクラス（Stylist or Member）
      */
-    public function findAccountByEmailAddress(string $emailAddress): ?Account;
+    public function findAccountByEmailAddress(string $emailAddress): Account;
 }

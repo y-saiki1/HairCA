@@ -20,9 +20,12 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
-#general
+#Auth
 <!-- START_a925a8d22b3615f12fca79456d286859 -->
-## ユーザーログイン
+## Login
+
+ユーザーログイン
+
 ログインする場合は以下のパラメータを用意すること
 
 > Example request:
@@ -83,8 +86,12 @@ Parameter | Type | Status | Description
 
 <!-- END_a925a8d22b3615f12fca79456d286859 -->
 
+#Stylist
 <!-- START_1b3e3725dd2384ba7c12a125584307a3 -->
-## スタイリスト招待
+## Invite Stylist
+
+スタイリスト招待
+
 現在ログインしているスタイリストアカウントで招待メールを送る。
 
 > Example request:
@@ -154,11 +161,12 @@ Parameter | Type | Status | Description
 <!-- END_1b3e3725dd2384ba7c12a125584307a3 -->
 
 <!-- START_1e69046fec63f90d27faf177eae66349 -->
-## 招待メール認証
+## Authenticate invitation
+
+招待メール認証
+
 招待トークンと招待したメールアドレスが一致しているか判定し、一致していればメッセージと現在の自分のアカウントのタイプを返す。
-
 招待メールが既にスタイリストか一般会員で登録されていた場合は is_member か is_stylist が true になる。ゲスト（アカウント持ってない）だった場合は is_guest が true になる。
-
 ３つの内どれか一つがtrueだった場合は他はfalseになる。
 
 > Example request:
@@ -209,7 +217,10 @@ Parameter | Type | Status | Description
 <!-- END_1e69046fec63f90d27faf177eae66349 -->
 
 <!-- START_fe4538154eb1c4d5a122a259d9a295b1 -->
-## スタイリスト作成
+## Create Stylist
+
+スタイリスト作成
+
 アカウントに使う基本情報とスタイリストとしてこのアプリケーションにに登録する。スタイリストのプロフィール作成APIではない。
 
 > Example request:

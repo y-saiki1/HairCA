@@ -11,8 +11,14 @@ use App\Http\Responders\Auth\TokenResponder;
 class CreateAction extends Controller
 {
     /**
+     * Create Stylist
+     * 
      * スタイリスト作成
+     * 
      * アカウントに使う基本情報とスタイリストとしてこのアプリケーションにに登録する。スタイリストのプロフィール作成APIではない。
+     * 
+     * @group Stylist
+     * 
      * @bodyParam name string required アカウント名 Example: アカウント名
      * @bodyParam email string required ログインするアカウントのメールアドレス Example: example@exam.com
      * @bodyParam password string required パスワード Example: password
