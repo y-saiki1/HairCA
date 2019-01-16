@@ -8,7 +8,7 @@ use App\Http\Requests\Accounts\Stylists\CreateStylistRequest;
 use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
-class CreateAction extends Controller
+class CreateStylistAction extends Controller
 {
     /**
      * Create Stylist

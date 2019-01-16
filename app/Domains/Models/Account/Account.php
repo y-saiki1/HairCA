@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Models\BaseAccount;
+namespace App\Domains\Models\Account;
 
 interface Account
 {

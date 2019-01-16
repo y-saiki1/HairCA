@@ -5,7 +5,7 @@ namespace App\Domains\UseCases\Accounts\Stylists;
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Exceptions\StylistProfileNotExistsException;
 
-use App\Domains\Models\BaseAccount\Account;
+use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\Guest;
 use App\Domains\Models\Hash;

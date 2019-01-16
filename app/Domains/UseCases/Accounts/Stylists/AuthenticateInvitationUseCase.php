@@ -2,7 +2,7 @@
 
 namespace App\Domains\UseCases\Accounts\Stylists;
 
-use App\Domains\Models\BaseAccount\Account;
+use App\Domains\Models\Account\Account;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 

@@ -5,7 +5,7 @@ namespace App\Infrastructures\Repositories\Eloquents;
 use Illuminate\Contracts\Hashing\Hasher;
 use Carbon\Carbon;
 
-use App\Domains\Models\BaseAccount\Account;
+use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\Guest;
 use App\Domains\Models\Account\Member\Member;

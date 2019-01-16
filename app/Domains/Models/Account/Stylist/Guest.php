@@ -3,8 +3,8 @@
 namespace App\Domains\Models\Account\Stylist;
 
 use App\Domains\Models\Hash;
-use App\Domains\Models\BaseAccount\Account;
-use App\Domains\Models\BaseAccount\AccountTrait;
+use App\Domains\Models\Account\Account;
+use App\Domains\Models\Account\AccountTrait;
 use App\Domains\Models\Account\Stylist\Stylist;
 
 class Guest implements Account
