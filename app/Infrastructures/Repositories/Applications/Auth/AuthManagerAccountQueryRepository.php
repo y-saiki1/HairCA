@@ -3,7 +3,9 @@
 namespace App\Infrastructures\Repositories\Applications\Auth;
 
 use Illuminate\Auth\AuthManager;
-use App\Exceptions\NotExistsException;
+
+use App\Domains\Exceptions\NotExistsException;
+use App\Domains\Exceptions\StylistProfileNotExistsException;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 

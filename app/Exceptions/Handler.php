@@ -5,6 +5,12 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use App\Domains\Exceptions\NotExistsException;
+use App\Domains\Exceptions\StylistProfileNotExistsException;
+
+use App\Http\Responders\Exceptions\NotExistsResponder;
+use App\Http\Responders\Exceptions\StylistProfileNotExistsResponder;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -48,6 +54,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof NotExistsException) {
+            return new NotExistsResponder($exception, $request->all());
+        }
+
+        if($exception instanceof StylistProfileNotExistsException) {
+            return new StylistProfileNotExistsResponder($exception, $request->all());
+        }
+
         return parent::render($request, $exception);
     }
 }

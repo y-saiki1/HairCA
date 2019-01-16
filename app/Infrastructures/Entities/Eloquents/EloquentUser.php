@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-use App\Exceptions\StylistProfileNotExistsException;
+use App\Domains\Exceptions\StylistProfileNotExistsException;
 
 use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\Account\Stylist\Stylist;

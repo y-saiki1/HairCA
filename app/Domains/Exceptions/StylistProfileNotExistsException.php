@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Domains\Exceptions;
 
 class StylistProfileNotExistsException extends \Exception
 {
