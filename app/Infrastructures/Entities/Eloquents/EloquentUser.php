@@ -65,7 +65,12 @@ class EloquentUser extends Authenticatable implements JWTSubject
             ->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')
             ->first();
 
-        if (! $stylistProfile) throw new StylistProfileNotExistsException('This Account do not have a profile');
+        if (! $stylistProfile) {
+            throw new StylistProfileNotExistsException(
+                'Please create Stylist Profile this Account',
+                StylistProfileNotExistsException::ERROR_CODE
+            );
+        }
 
         return $stylistProfile->toDomain();
     }

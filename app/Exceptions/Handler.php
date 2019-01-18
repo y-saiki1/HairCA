@@ -4,12 +4,12 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Exceptions\StylistProfileNotExistsException;
 
-use App\Http\Responders\Exceptions\NotExistsResponder;
-use App\Http\Responders\Exceptions\StylistProfileNotExistsResponder;
+use App\Http\Responders\Exceptions\ErrorResponder;
 
 class Handler extends ExceptionHandler
 {
@@ -54,12 +54,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof NotExistsException) {
-            return new NotExistsResponder($exception, $request->all());
+        if ($exception instanceof NotExistsException) {
+            $errorResponder = new ErrorResponder;
+            return $errorResponder($exception, $request->all(), Response::HTTP_NOT_FOUND);
         }
 
-        if($exception instanceof StylistProfileNotExistsException) {
-            return new StylistProfileNotExistsResponder($exception, $request->all());
+        if ($exception instanceof StylistProfileNotExistsException) {
+            $errorResponder = new ErrorResponder;
+            return $errorResponder($exception, $request->all(), Response::HTTP_FAILED_DEPENDENCY);
         }
 
         return parent::render($request, $exception);

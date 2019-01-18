@@ -62,7 +62,7 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
             ]);
             
         // tymon/jwt-authの例外をキャッチする必要あり。attemptではなく別のメソッドを探すべき
-        if (! $token) throw new NotExistsException('Failed to login');
+        if (! $token) throw new NotExistsException('Failed to login', NotExistsException::ERROR_CODE);
 
         return new JsonWebToken($token);
     }
@@ -92,7 +92,7 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
             ->where('token', $invitationToken)
             ->first();
 
-        if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email and Token');
+        if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email and Token', NotExistsException::ERROR_CODE);
 
         return $guest->toDomain();
     }
@@ -108,7 +108,7 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
             ->where('email', $emailAddress)
             ->first();
 
-        if (! $account) throw new NotExistsException('An Account that have this Email is not exists');
+        if (! $account) throw new NotExistsException('An Account that have this Email is not exists', NotExistsException::ERROR_CODE);
 
         return $account->toDomain();
     }
