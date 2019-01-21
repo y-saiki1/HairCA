@@ -29,15 +29,6 @@ interface AccountUseCaseQuery
     public function myAccount(): Account;
 
     /**
-     * メールアドレスと招待トークンでGuestユーザー（招待されたユーザー）を検索し、Guestを返す
-     * @param EmailAddress $email
-     * @param Hash 招待トークン
-     * @return Guest ゲスト
-     * @throws NotExistsException 指定メールアドレス・パスワードを持つゲストが存在しない時に発生する。
-     */
-    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest;
-
-    /**
      * メールアドレスでアカウントを取得。なければNullを返す
      * @param string メールアドレス
      * @return Account AccountInterfaceを継承したクラス（Stylist or Member）

@@ -6,6 +6,7 @@ use App\Domains\Models\Hash;
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\AccountTrait;
 use App\Domains\Models\Account\Stylist\Stylist;
+use App\Domain\Models\Account\Stylist\Recommender;
 
 class Guest implements Account
 {
@@ -17,7 +18,7 @@ class Guest implements Account
     const NOT_ACCOUNT = 0;
 
     /**
-     * @var Stylist 招待者
+     * @var Recommender 招待者
      */
     private $recommender;
 
@@ -42,7 +43,7 @@ class Guest implements Account
      * @param Introduction 紹介文
      */
     public function __construct(
-        Stylist $recommender,
+        Recommender $recommender,
         string $emailAddress,
         string $recommendation
     ) {
@@ -70,19 +71,11 @@ class Guest implements Account
     }
 
     /**
-     * @return string 招待者
+     * @return Recommender 招待者
      */
-    public function recommender(): Stylist
+    public function recommender(): Recommender
     {
         return $this->recommender;
-    }
-
-    /**
-     * @return string 招待されたメールアドレス
-     */
-    public function emailAddress(): string
-    {
-        return $this->emailAddress;
     }
 
     /**

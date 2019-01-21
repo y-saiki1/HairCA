@@ -80,24 +80,6 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
     }
 
     /**
-     * メールアドレスと招待トークンでGuestユーザー（招待されたユーザー）を検索し、Guestを返す
-     * @param string $email
-     * @param string 招待トークン
-     * @return Guest ゲスト
-     */
-    public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest
-    {
-        $guest = $this->eloquentGuest
-            ->where('email', $emailAddress)
-            ->where('token', $invitationToken)
-            ->first();
-
-        if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email and Token', NotExistsException::ERROR_CODE);
-
-        return $guest->toDomain();
-    }
-
-    /**
      * メールアドレスでアカウントを取得。
      * @param string メールアドレス
      * @return Account AccountInterfaceを継承したクラス（Stylist or Member）
@@ -112,4 +94,39 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
 
         return $account->toDomain();
     }
+
+    // /**
+    //  * メールアドレスと招待トークンでGuestユーザー（招待されたユーザー）を検索し、Guestを返す
+    //  * @param string $email
+    //  * @param string 招待トークン
+    //  * @return Guest ゲスト
+    //  */
+    // public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest
+    // {
+    //     $guest = $this->eloquentGuest
+    //         ->where('email', $emailAddress)
+    //         ->where('token', $invitationToken)
+    //         ->first();
+
+    //     if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email and Token', NotExistsException::ERROR_CODE);
+
+    //     return $guest->toDomain();
+    // }
+
+    // /**
+    //  * メールアドレスでGuestユーザー（招待されたユーザー）を検索し、Guestを返す
+    //  * @param EmailAddress $email
+    //  * @return Guest ゲスト
+    //  * @throws NotExistsException 指定メールアドレス・パスワードを持つゲストが存在しない時に発生する。
+    //  */
+    // public function findGuestByEmailAddress(string $emailAddress): Guest
+    // {
+    //     $guest = $this->eloquentGuest
+    //         ->where('email', $emailAddress)
+    //         ->first();
+        
+    //     if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email', NotExistsException::ERROR_CODE);
+
+    //     return $guest->toDoamin();
+    // }
 }

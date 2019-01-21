@@ -20,4 +20,12 @@ interface StylistUseCaseQuery
      * @throws NotExistsException 指定メールアドレス・パスワードを持つゲストが存在しない時に発生する。
      */
     public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest;
+
+    /**
+     * メールアドレスでGuestユーザー（招待されたユーザー）を検索し、Guestを返す
+     * @param EmailAddress $email
+     * @return Guest ゲスト
+     * @throws NotExistsException 指定メールアドレス・パスワードを持つゲストが存在しない時に発生する。
+     */
+    public function findGuestByEmailAddress(string $emailAddress): Guest;
 }

@@ -8,6 +8,12 @@ use App\Domains\Models\Account\Stylist\Guest;
 interface StylistUseCaseCommand
 {
     /**
+     * @param Guest ゲスト
+     * @return bool
+     */
+    public function saveGuest(Guest $guest): bool;
+    
+    /**
      * アカウント登録処理。パスワードを別にして渡している理由は、パスワードのハッシュ化をフレームワーク側に任せるため。
      * フレームワーク側でログインの管理を行なっている場合、平文のパスワードを渡すとフレームワークがハッシュ化を行うため（laravelはそうなっている）、ドメイン層から外す。
      * @param string アカウント名
@@ -18,8 +24,9 @@ interface StylistUseCaseCommand
     public function save(string $name, string $emailAddress, string $password): bool;
 
     /**
-     * @param Guest ゲスト
+     * @param int アカウントID
+     * @param StylistProfile スタイリストプロフィール
      * @return bool
      */
-    public function saveGuest(Guest $guest): bool;
+    public function saveStylistProfile(int $accountId, StylistProfile $stylistProfile): bool;
 }

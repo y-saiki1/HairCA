@@ -28,10 +28,10 @@ class AuthenticateInvitationAction extends Controller
      * @bodyParam email string required 招待メールを送ったメアド Example: example@exam.com
      * @bodyParam invitation_token string required 招待メールに付いてくるトークン Example: token
      * @response 200 {
-     *  'message': 'The Guest that have this Email and Token is Stylist'
-     *  'is_guest': true
-     *  'is_stylist': false
-     *  'is_member': false
+     *  "message": "The Guest that have this Email and Token is Stylist",
+     *  "is_guest": true,
+     *  "is_stylist": false,
+     *  "is_member": false
      * }
      * @param AuthenticateInvitationRequest 招待認証リクエスト
      * @param AuthenticateInvitationUseCase 招待認証ユースケース

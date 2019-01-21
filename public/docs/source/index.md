@@ -201,7 +201,12 @@ fetch(url, {
 > Example response (200):
 
 ```json
-{}
+{
+    "message": "The Guest that have this Email and Token is Stylist",
+    "is_guest": true,
+    "is_stylist": false,
+    "is_member": false
+}
 ```
 
 ### HTTP Request

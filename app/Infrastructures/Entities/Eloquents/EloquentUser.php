@@ -74,7 +74,7 @@ class EloquentUser extends Authenticatable implements JWTSubject
 
         return $stylistProfile->toDomain();
     }
-
+ 
     /**
      * アカウントインターフェイスを継承したドメインモデルを返却する
      * @return Account Stylist, Member

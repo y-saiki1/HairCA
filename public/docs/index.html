@@ -230,7 +230,12 @@ fetch(url, {
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "message": "The Guest that have this Email and Token is Stylist",
+    "is_guest": true,
+    "is_stylist": false,
+    "is_member": false
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/accounts/stylists/auth</code></p>
 <h4>Body Parameters</h4>

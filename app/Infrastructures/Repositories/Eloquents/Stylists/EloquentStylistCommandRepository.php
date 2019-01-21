@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Eloquents;
+namespace App\Infrastructures\Repositories\Eloquents\Stylists;
 
 use Illuminate\Contracts\Hashing\Hasher;
 use Carbon\Carbon;
@@ -8,14 +8,14 @@ use Carbon\Carbon;
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\Guest;
-use App\Domains\Models\Account\Member\Member;
+use App\Domains\Models\Account\Stylist\StylistProfile;
 
-use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
+use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 
 use App\Infrastructures\Entities\Eloquents\EloquentUser;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 
-class EloquentAccountCommandRepository implements AccountUseCaseCommand
+class EloquentStylistCommandRepository implements StylistUseCaseCommand
 {
     /**
      * @var EloquentUser
@@ -48,6 +48,32 @@ class EloquentAccountCommandRepository implements AccountUseCaseCommand
     }
 
     /**
+     * 招待したメールアドレスとトークンを保存する
+     * @param Guest ゲスト
+     * @return bool
+     */
+    public function saveGuest(Guest $guest): bool
+    {
+        $eloquentGuest = $this->eloquentGuest->firstOrNew(
+            [
+                'user_id'        => $guest->recommender()->id(),
+                'email'          => $guest->emailAddress(),
+            ],
+            [
+                'token'          => $guest->token(),
+                'recommendation' => $guest->recommendation(),
+            ]
+        );
+
+        if (! $eloquentGuest->wasRecentlyCreated) {
+            $eloquentGuest->token = $guest->token();
+            $eloquentGuest->updated_at = Carbon::now();
+        }
+
+        return $eloquentGuest->save();
+    }
+
+    /**
      * アカウント登録処理。パスワードを別にして渡している理由は、パスワードのハッシュ化をフレームワーク側に任せるため。
      * フレームワーク側でログインの管理を行なっている場合、平文のパスワードを渡すとフレームワークがハッシュ化を行うため（laravelはそうなっている）、ドメイン層から外す。
      * @param string アカウント名
@@ -75,57 +101,17 @@ class EloquentAccountCommandRepository implements AccountUseCaseCommand
         return $user->save();
     }
 
-    // /**
-    //  * @param
-    //  */
-    // public function updateMemberToStylist(Guest $guest, Member $member): Account
-    // {
-    // }
-
     /**
-     * 招待したメールアドレスとトークンを保存する
-     * @param Guest ゲスト
+     * @param int アカウントID
+     * @param StylistProfile スタイリストプロフィール
      * @return bool
      */
-    public function saveGuest(Guest $guest): bool
+    public function saveStylistProfile(int $accountId, StylistProfile $stylistProfile): bool
     {
-        $eloquentGuest = $this->eloquentGuest->firstOrNew(
-            [
-                'user_id'        => $guest->recommender()->id(),
-                'email'          => $guest->emailAddress(),
-            ],
-            [
-                'token'          => $guest->token(),
-                'recommendation' => $guest->recommendation(),
-            ]
-        );
+        $this->EloquentStylistProfile->user_id = $accountId;
+        $this->EloquentStylistProfile->recommender_id = $stylistProfile->recommender()->id();
+        $this->EloquentStylistProfile->recommendation = $stylistProfile->recommendation();
 
-        if (! $eloquentGuest->wasRecentlyCreated) {
-            $eloquentGuest->token = $guest->token();
-            $eloquentGuest->updated_at = Carbon::now();
-        }
-
-        return $eloquentGuest->save();
+        return $this->EloquentStylistProfile->save();
     }
-
-    // /**
-    //  * 
-    //  */
-    // public function saveStylistProfile(int $userId, int $recommenderId, string $recommendation)
-    // {
-    //     $recommenderId = $guest->recommender()->id();
-    //     $recommendation = $guest->recommendation();
-
-    //     return $this->saveStylistProfile(
-    //         $user->id,
-    //         $recommenderId,
-    //         $recommendation
-    //     );
-
-    //     $this->EloquentStylistProfile->user_id = $userId;
-    //     $this->EloquentStylistProfile->recommender_id = $recommenderId;
-    //     $this->EloquentStylistProfile->recommendation = $recommendation;
-
-    //     return $this->EloquentStylistProfile->save();
-    // }
 }

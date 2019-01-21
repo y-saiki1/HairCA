@@ -3,18 +3,32 @@
 namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Exceptions\NotExistsException;
-
 use App\Domains\Models\Account\Account;
-
+use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
 class AuthenticateInvitationUseCase
 {
-    private $accountUseCaseQuery;
+    /**
+     * @var AccountUseCaseQuery アカウント操作UseCase
+     */
+    private $accountQuery;
 
-    public function __construct(AccountUseCaseQuery $accountUseCaseQuery)
-    {
-        $this->accountUseCaseQuery = $accountUseCaseQuery;
+    /**
+     * @var StylistUseCaseQuery アカウント取得UseCase
+     */
+    private $stylistQuery;
+
+    /**
+     * @param AccountUseCaseQuery メール操作UseCase
+     * @param StylistUseCaseQuery アカウント取得UseCase
+     */
+    public function __construct(
+        AccountUseCaseQuery $accountQuery,
+        StylistUseCaseQuery $stylistQuery
+    ) {
+        $this->accountQuery = $accountQuery;
+        $this->stylistQuery = $stylistQuery;
     }
 
     /**
@@ -27,10 +41,10 @@ class AuthenticateInvitationUseCase
      */
     public function __invoke(string $emailAddress, string $invitationToken): Account
     {
-        $guest = $this->accountUseCaseQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
+        $guest = $this->StylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
 
         try {
-            $account = $this->accountUseCaseQuery->findAccountByEmailAddress($guest->emailAddress());
+            $account = $this->accountQuery->findAccountByEmailAddress($guest->emailAddress());
         } catch(NotExistsException $e) {
             return $guest;
         }

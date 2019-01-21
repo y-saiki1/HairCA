@@ -7,7 +7,7 @@ use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
-class CreateStylistUseCase
+class CreateStylistProfileUseCase
 {
     /**
      * @var AccountUseCaseQuery アカウント操作UseCase
@@ -38,20 +38,25 @@ class CreateStylistUseCase
         $this->stylistCommand = $stylistCommand;
         $this->stylistQuery = $stylistQuery;
     }
-
+    
     /**
-     * @param string アカウント名
-     * @param string メールアドレス
-     * @param string パスワード
-     * @param string 招待トークン
-     * @return mixed bool false | null ログイン失敗 | JsonWebToken jwt返却
+     * @param string 自己紹介文
+     * @param int 年齢
+     * @param int 性別
      */
-    public function __invoke(string $name, string $emailAddress, string $password, string $invitationToken) 
+    public function __invoke(string $introduction, int $age, int $sex) 
     {
-        $guest = $this->stylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
-        $isSaved = $this->stylistCommand->saveStylist($name, $guest->emailAddress(), $password);
-        if (! $isSaved) return false;
+        $account = $this->accountQuery->myAccount();
+        $guest = $this->stylistQuery->findGuestByEmailAddress($account->emailAddress());
 
-        return $this->accountQuery->login($guest->emailAddress(), $password);
+        $stylistProfile = new StylistProfile(
+            $guest->recommender(),
+            $guest->recommendation(),
+            $introduction,
+            $age,
+            $sex
+        );
+
+        return $this->stylistCommand->saveStylistProfile($myAccount->id(), $stylistProfile);
     }
 }
