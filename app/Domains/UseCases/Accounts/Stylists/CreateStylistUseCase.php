@@ -44,14 +44,15 @@ class CreateStylistUseCase
      * @param string メールアドレス
      * @param string パスワード
      * @param string 招待トークン
-     * @return mixed bool false | null ログイン失敗 | JsonWebToken jwt返却
+     * @return JsonWebToken jwt返却
      */
     public function __invoke(string $name, string $emailAddress, string $password, string $invitationToken) 
     {
         $guest = $this->stylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
-        $isSaved = $this->stylistCommand->saveStylist($name, $guest->emailAddress(), $password);
-        if (! $isSaved) return false;
+        
+        $stylist = $this->stylistCommand->saveStylist($name, $guest->emailAddress(), $password);
+        $this->stylistCommand->saveStylistProfile($stylist->id(), $guest);
 
-        return $this->accountQuery->login($guest->emailAddress(), $password);
+        return $this->accountQuery->login($stylist->emailAddress(), $password);
     }
 }

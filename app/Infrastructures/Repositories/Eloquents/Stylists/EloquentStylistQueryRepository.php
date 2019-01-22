@@ -2,15 +2,18 @@
 
 namespace App\Infrastructures\Repositories\Eloquents\Stylists;
 
+use App\Domains\Models\Account\Account;
+use App\Domains\Models\Account\Stylist\Stylist;
+use App\Domains\Models\Account\Guest\Guest;
+
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 
-class EloquentStylistCommandRepository implements StylistUseCaseQuery
-{
-    /**
-     * @var AuthManager Laravelの認証クラス
-     */
-    private $authManager;
+use App\Infrastructures\Entities\Eloquents\EloquentUser;
+use App\Infrastructures\Entities\Eloquents\EloquentGuest;
+use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 
+class EloquentStylistQueryRepository implements StylistUseCaseQuery
+{
     /**
      * @var EloqeuntUser Eloqeuntユーザー
      */
@@ -22,13 +25,11 @@ class EloquentStylistCommandRepository implements StylistUseCaseQuery
     private $eloquentGuest;
 
     /**
-     * @param AuthManager Laravelの認証クラス
      * @param EloquentUser eloquentUser
      * @param EloquentGuest eloquentGuest
      */
-    public function __construct(AuthManager $authManager, EloquentUser $eloquentUser, EloquentGuest $eloquentGuest)
+    public function __construct(EloquentUser $eloquentUser, EloquentGuest $eloquentGuest)
     {
-        $this->authManager = $authManager;
         $this->eloquentUser = $eloquentUser;
         $this->eloquentGuest = $eloquentGuest;
     }

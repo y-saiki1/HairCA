@@ -14,8 +14,14 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'api'], function ($router) {
+    // Account
     Route::post('/auth/login', 'Auth\\LoginAction');
+
+    // Stylist
+    Route::post('/accounts/stylists',        'Accounts\\Stylists\\CreateStylistAction');
     Route::post('/accounts/stylists/invite', 'Accounts\\Stylists\\InviteAction')->middleware('auth:api');
-    Route::post('/accounts/stylists/auth', 'Accounts\\Stylists\\AuthenticateInvitationAction');
-    Route::post('/accounts/stylists', 'Accounts\\Stylists\\CreateStylistAction');
+    Route::post('/accounts/stylists/auth',   'Accounts\\Stylists\\AuthenticateInvitationAction');
+    
+    // StylistProfile
+    Route::post('/accounts/stylists/profiles', 'Accounts\\Stylists\\CreateStylistProfileAction')->middleware('auth:api');
 });

@@ -5,6 +5,33 @@ namespace App\Domains\Models\Account;
 trait AccountTrait
 {
     /**
+     * @var int アカウントID
+     */
+    private $id;
+
+    /**
+     * @var string アカウント名
+     */
+    private $name;
+
+    /**
+     * @var string メールアドレス
+     */
+    private $emailAddress;
+
+    /**
+     * @param int アカウントid
+     * @param string アカウント名
+     * @param string メールアドレス
+     */
+    public function __construct(int $id, string $name, string $emailAddress)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->emailAddress = $emailAddress;
+    }
+    
+    /**
      * @return int アカウントID
      */
     public function id(): int

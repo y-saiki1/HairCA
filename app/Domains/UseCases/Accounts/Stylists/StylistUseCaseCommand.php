@@ -3,7 +3,9 @@
 namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Account\Account;
-use App\Domains\Models\Account\Stylist\Guest;
+use App\Domains\Models\Account\Stylist\Stylist;
+use App\Domains\Models\Account\Guest\Guest;
+use App\Domains\Models\Account\Stylist\StylistProfile;
 
 interface StylistUseCaseCommand
 {
@@ -21,12 +23,21 @@ interface StylistUseCaseCommand
      * @param string パスワード(平文)
      * @return bool 保存成功
      */
-    public function save(string $name, string $emailAddress, string $password): bool;
+    public function saveStylist(string $name, string $emailAddress, string $password): Stylist;
 
     /**
+     * @param int スタイリストID
+     * @param Guest ゲスト
+     */
+    public function saveStylistProfile(int $accountId, Guest $guest): bool;
+    
+    /**
      * @param int アカウントID
-     * @param StylistProfile スタイリストプロフィール
+     * @param string 自己紹介文
+     * @param DateTime 生年月日
+     * @param int 性別
+     * @param string 都道府県
      * @return bool
      */
-    public function saveStylistProfile(int $accountId, StylistProfile $stylistProfile): bool;
+    public function updateStylistProfile(int $accountId, string $introduction, \DateTime $birthDate, int $sex, string $prefecture): bool;
 }

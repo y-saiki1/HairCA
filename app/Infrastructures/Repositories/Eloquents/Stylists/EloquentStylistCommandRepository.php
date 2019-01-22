@@ -2,30 +2,39 @@
 
 namespace App\Infrastructures\Repositories\Eloquents\Stylists;
 
+use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Hashing\Hasher;
 use Carbon\Carbon;
 
+use App\Domains\Exceptions\NotExistsException;
+
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
-use App\Domains\Models\Account\Stylist\Guest;
+use App\Domains\Models\Account\Guest\Guest;
 use App\Domains\Models\Account\Stylist\StylistProfile;
 
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 
 use App\Infrastructures\Entities\Eloquents\EloquentUser;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
+use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 
 class EloquentStylistCommandRepository implements StylistUseCaseCommand
 {
+    /**
+     * @var EloquentGuest
+     */
+    private $eloquentGuest;
+
     /**
      * @var EloquentUser
      */
     private $eloquentUser;
 
     /**
-     * @var EloquentGuest
+     * @var EloquentStylistProfile
      */
-    private $eloquentGuest;
+    private $eloquentStylistProfile;
 
     /**
      * @var Hasher
@@ -33,17 +42,20 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
     private $accountPasswordHasher;
 
     /**
-     * @param EloquentUser
      * @param EloquentGuest
+     * @param EloquentUser
+     * @param EloquentStylistProfile
      * @param Hasher
      */
     public function __construct(
-        EloquentUser $eloquentUser, 
         EloquentGuest $eloquentGuest,
+        EloquentUser $eloquentUser,
+        EloquentStylistProfile $eloquentStylistProfile,
         Hasher $accountPasswordHasher
     ) {
-        $this->eloquentUser = $eloquentUser;
         $this->eloquentGuest = $eloquentGuest;
+        $this->eloquentUser = $eloquentUser;
+        $this->eloquentStylistProfile = $eloquentStylistProfile;
         $this->accountPasswordHasher = $accountPasswordHasher;
     }
 
@@ -61,7 +73,7 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
             ],
             [
                 'token'          => $guest->token(),
-                'recommendation' => $guest->recommendation(),
+                'recommendation' => $guest->recommender()->recommendation(),
             ]
         );
 
@@ -81,7 +93,7 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
      * @param string パスワード(平文)
      * @return bool 保存成功
      */
-    public function saveStylist(string $name, string $emailAddress, string $password): bool
+    public function saveStylist(string $name, string $emailAddress, string $password): Stylist
     {
         $user = $this->eloquentUser->firstOrNew(
             [
@@ -97,20 +109,41 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
         if (! $user->wasRecentlyCreated) {
             $user->updated_at = Carbon::now();
         }
+        
+        $user->save();
 
-        return $user->save();
+        return $user->toDomain();
+    }
+
+    /**
+     * @param int スタイリストID
+     * @param Guest ゲスト
+     */
+    public function saveStylistProfile(int $accountId, Guest $guest): bool
+    {
+        $this->EloquentStylistProfile->user_id = $accountId;
+        $this->EloquentStylistProfile->recommender_id = $guest->recommender()->id();
+        $this->EloquentStylistProfile->recommendation = $guest->recommender()->recommendation();
+        
+        return $this->EloquentStylistProfile->save();
     }
 
     /**
      * @param int アカウントID
-     * @param StylistProfile スタイリストプロフィール
+     * @param string 自己紹介文
+     * @param DateTime 生年月日
+     * @param int 性別
+     * @param string 都道府県
      * @return bool
      */
-    public function saveStylistProfile(int $accountId, StylistProfile $stylistProfile): bool
+    public function updateStylistProfile(int $accountId, string $introduction, \DateTime $birthDate, int $sex, string $prefecture): bool
     {
-        $this->EloquentStylistProfile->user_id = $accountId;
-        $this->EloquentStylistProfile->recommender_id = $stylistProfile->recommender()->id();
-        $this->EloquentStylistProfile->recommendation = $stylistProfile->recommendation();
+        $this->EloquentStylistProfile->user_id = $user->id;
+        $this->EloquentStylistProfile->recommender_id = $guest->recommender()->id();
+        $this->EloquentStylistProfile->recommendation = $guest->recommender()->recommendation();
+        $this->EloquentStylistProfile->introduction = $introduction;
+        $this->EloquentStylistProfile->age = $age;
+        $this->EloquentStylistProfile->sex = $sex;
 
         return $this->EloquentStylistProfile->save();
     }

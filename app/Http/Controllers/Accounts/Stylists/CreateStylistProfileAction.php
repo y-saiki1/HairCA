@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Accounts\Stylists;
+namespace App\Http\Controllers\Accounts\Stylists;
 
 use App\Http\Requests\Accounts\Stylists\CreateStylistProfileRequest;
 use App\Domains\UseCases\Accounts\Stylists\CreateStylistProfileUseCase;
@@ -28,13 +28,11 @@ class CreateStylistProfileAction
         //     $request->hair_salon_street_number,
         //     $request->hair_salon_building_name
         // );
-
         $createStylistProfileUseCase(
             $request->introduction,
             $request->age,
             $request->sex
         );
-        
         $responder;
         
     }

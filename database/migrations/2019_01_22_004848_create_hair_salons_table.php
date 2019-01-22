@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStylistProfilesTable extends Migration
+class CreateHairSalonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateStylistProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('stylist_profiles', function (Blueprint $table) {
+        Schema::create('hair_salons', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->text('introduction');
-            $table->dateTime('birth_date');
-            $table->integer('sex');
-            
-            // 最寄駅必須
+            $table->string('hair_salon_name');
+            $table->integer('hair_salon_postal_code');
+            $table->string('hair_salon_prefecture');
+            $table->string('hair_salon_municipality');
+            $table->string('hair_salon_street_number');
+            $table->string('hair_salon_building_name');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateStylistProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eloquent_stylist_profiles');
+        Schema::dropIfExists('hair_salons');
     }
 }

@@ -4,14 +4,15 @@ namespace App\Domains\Models\Account\Stylist;
 
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\AccountTrait;
-use App\Domains\Models\Account\Stylist\Guest;
+use App\Domains\Models\Account\Guest\Guest;
+use App\Domains\Models\Account\Stylist\Recommender;
 use App\Domains\Models\Account\Stylist\StylistProfile;
 
 class Stylist implements Account
 {
     use AccountTrait;
 
-    const ACCOUNT_TYPE = 1; // Stylist
+    const ACCOUNT_TYPE = 1;
     const ACCOUNT_TYPE_NAME = 'Stylist';
 
     /**
@@ -30,39 +31,18 @@ class Stylist implements Account
     private $emailAddress;
 
     /**
-     * @var StylistProfile スタイリストプロフィール
-     */
-    private $stylistProfile;
-    
-    /**
-     * @param int アカウントID
-     * @param string アカウント名
-     * @param string メールアドレス
-     * @param StylistProfile スタイリストプロフィール
-     */
-    public function __construct(
-        int $id,
-        string $name,
-        string $emailAddress,
-        StylistProfile $stylistProfile
-        
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->emailAddress = $emailAddress;
-        $this->stylistProfile = $stylistProfile;
-    }
-
-    /**
      * @param string メールアドレス
      * @param string 推薦文
      */
     public function inviteGuest(string $emailAddress, string $recommendation): Guest
     {
         return new Guest(
-            $this,
-            $emailAddress,
-            $recommendation
+            new Recommender(
+                $this->id(),
+                $this->name(),
+                $recommendation
+            ),
+            $emailAddress
         );
     }
 }

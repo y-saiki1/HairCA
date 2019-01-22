@@ -2,12 +2,14 @@
 
 namespace App\Domains\UseCases\Accounts\Stylists;
 
+use App\Domains\Exceptions\NotStylistException;
+
 use App\Domains\Models\Account\Stylist\StylistProfile;
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
-class CreateStylistProfileUseCase
+class UpdateStylistProfileUseCase
 {
     /**
      * @var AccountUseCaseQuery アカウント操作UseCase
@@ -43,20 +45,21 @@ class CreateStylistProfileUseCase
      * @param string 自己紹介文
      * @param int 年齢
      * @param int 性別
+     * @param string 都道府県
+     * @throws NotStylistException
      */
-    public function __invoke(string $introduction, int $age, int $sex) 
+    // public function __invoke(string $introduction, \DateTime $birthDate, int $sex, string $prefecture): bool
+    public function __invoke(StylistProfile $stylistProfile, HairSalon $hairSalon): bool
     {
         $account = $this->accountQuery->myAccount();
-        $guest = $this->stylistQuery->findGuestByEmailAddress($account->emailAddress());
+        if ($account->isStylist()) throw new NotStylistException('Only Stylist Account can create Stylist Profile', NotStylistException::ERROR_CODE);
 
-        $stylistProfile = new StylistProfile(
-            $guest->recommender(),
-            $guest->recommendation(),
+        return $this->stylistCommand->updateStylistProfile(
+            $account->id(),
             $introduction,
             $age,
-            $sex
+            $sex,
+            $prefecture
         );
-
-        return $this->stylistCommand->saveStylistProfile($myAccount->id(), $stylistProfile);
     }
 }

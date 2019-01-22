@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Models\Accounts\Stylist;
+namespace App\Domains\Models\HairSalon;
 
 class HairSalon
 {
@@ -10,24 +10,17 @@ class HairSalon
     private $hairSalonName;
 
     /**
-     * @var int 郵便番号
-     */
-    private $postalCode;
-
-    /**
-     * @var string 美容室の住所
+     * @var HomeAddress 美容室の住所
      */
     private $homeAddress;
 
     /**
      * @param string 美容室名
-     * @param int 郵便番号
      * @param string 美容室の住所
      */
     public function __construct(
         string $hairSalonName,
-        int $postalCode,
-        string $homeAddress
+        HomeAddress $homeAddress
     ) {
         $this->hairSalonName = $hairSalonName;
         $this->postalCode = $postalCode;

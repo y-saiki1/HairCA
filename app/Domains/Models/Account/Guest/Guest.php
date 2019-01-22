@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domains\Models\Account\Stylist;
+namespace App\Domains\Models\Account\Guest;
 
 use App\Domains\Models\Hash;
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\AccountTrait;
 use App\Domains\Models\Account\Stylist\Stylist;
-use App\Domain\Models\Account\Stylist\Recommender;
+use App\Domains\Models\Account\Stylist\Recommender;
 
 class Guest implements Account
 {
@@ -23,16 +23,6 @@ class Guest implements Account
     private $recommender;
 
     /**
-     * @var string 招待されるメールアドレス
-     */
-    private $emailAddress;
-
-    /**
-     * @var string 推薦文
-     */
-    private $recommendation;
-
-    /**
      * @var Hash 招待トークン
      */
     private $token;
@@ -44,12 +34,10 @@ class Guest implements Account
      */
     public function __construct(
         Recommender $recommender,
-        string $emailAddress,
-        string $recommendation
+        string $emailAddress
     ) {
         $this->recommender = $recommender;
         $this->emailAddress = $emailAddress;
-        $this->recommendation = $recommendation;
 
         $this->token = new Hash(uniqid(rand(), true));
     }
@@ -76,14 +64,6 @@ class Guest implements Account
     public function recommender(): Recommender
     {
         return $this->recommender;
-    }
-
-    /**
-     * @return string 推薦文
-     */
-    public function recommendation(): string
-    {
-        return $this->recommendation;
     }
 
     /**

@@ -51,15 +51,15 @@ class DatabaseSeeder extends Seeder
 
         /**
          * ユーザー系
-         * |--------------------------------|
-         * |users / guests / stylist_profile|
-         * |--------------------------------|
+         * |--------------------------------------------------------------|
+         * |users / guests / stylist_profiles / hair_salons / recommenders|
+         * |--------------------------------------------------------------|
          */
         
          //users
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('role_id')->references('id')
-                ->on('roles')->onDelete('cascade')->onUpdate('cascade');
+                ->on('roles')->onUpdate('cascade');
         });
 
         // guests
@@ -72,9 +72,19 @@ class DatabaseSeeder extends Seeder
         Schema::table('stylist_profiles', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('hair_salons', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('recommenders', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('recommender_id')->references('id')
-                ->on('users')->onDelete('cascade')->onUpdate('cascade');
+                ->on('users')->onUpdate('cascade');
         });
     }
 }

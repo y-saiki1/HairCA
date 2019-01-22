@@ -12,7 +12,7 @@ use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
-class InviteStylistUseCase extends StylistUseCase
+class InviteStylistUseCase
 {   
     /**
      * @var MailerUseCaseCommand メール操作UseCase

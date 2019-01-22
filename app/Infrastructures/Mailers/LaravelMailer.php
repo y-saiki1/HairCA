@@ -4,7 +4,7 @@ namespace App\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
 
-use App\Domains\Models\Account\Stylist\Guest;
+use App\Domains\Models\Account\Guest\Guest;
 
 use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
 use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;

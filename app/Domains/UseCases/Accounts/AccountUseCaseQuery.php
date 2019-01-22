@@ -7,7 +7,7 @@ use App\Domains\Exceptions\StylistProfileNotExistsException;
 
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
-use App\Domains\Models\Account\Stylist\Guest;
+use App\Domains\Models\Account\Guest\Guest;
 use App\Domains\Models\JWT\JsonWebToken;
 use App\Domains\Models\Hash;
 

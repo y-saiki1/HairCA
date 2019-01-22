@@ -7,14 +7,14 @@ class Hash
     /**
      * @var string ハッシュ
      */
-    private $hash;
+    private $value;
 
     /**
      * @param string 文字列
      */
     public function __construct(string $string)
     {
-        $this->hash = password_hash($string, PASSWORD_BCRYPT);
+        $this->value = password_hash($string, PASSWORD_BCRYPT);
     }
 
     /**
@@ -22,6 +22,6 @@ class Hash
      */
     public function value(): string
     {
-        return $this->hash;
+        return $this->value;
     }
 }

@@ -58,12 +58,19 @@ class EloquentUser extends Authenticatable implements JWTSubject
     /**
      * 1対１ スタイリストのプロフィール取得
      * @return StylistProfile
+     * @throws StylistProfileNotExistsException
      */
-    public function myStylistProfile(): ?StylistProfile
+    public function myStylistProfile(): StylistProfile
     {
         $stylistProfile = $this
             ->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')
             ->first();
+
+        // $hasStylistProfile = true;
+        // if (! $stylistProfile) $hasStylistProfile = false;
+        // elseif (! $stylistProfile->sex) $hasStylistProfile = false;
+        // elseif (! $stylistProfile->birth_date) $hasStylistProfile = false;
+        // elseif (! $stylistProfile->prefecture) $hasStylistProfile = false;
 
         if (! $stylistProfile) {
             throw new StylistProfileNotExistsException(
@@ -85,8 +92,7 @@ class EloquentUser extends Authenticatable implements JWTSubject
             $account = new Stylist(
                 $this->id,
                 $this->name,
-                $this->email,
-                $this->myStylistProfile()
+                $this->email
             );
         }
         
