@@ -26,8 +26,8 @@ class EloquentGuest extends Model
     {
         $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentUser', 'user_id')->first();
         return new Recommender(
-            $stylist->id(),
-            $stylist->name(),
+            $stylist->id,
+            $stylist->name,
             $recommendation
         );
     }

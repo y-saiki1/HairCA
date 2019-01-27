@@ -57,7 +57,7 @@ class InviteStylistUseCase
 
         $guest = $stylist->inviteGuest($emailAddress, $recommendation);
 
-        $isSaved = $this->stylistCommand->saveGuest($guest);
+        $this->stylistCommand->saveGuest($guest);
         $this->emailCommand->sendInvitationMail($guest);
 
         return $guest->token();

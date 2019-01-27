@@ -27,12 +27,7 @@ class CreateStylistProfileRequest extends FormRequest
             'age'                      => 'required|int',
             'sex'                      => 'required|int',
             'introduction'             => 'required|string|max:600',
-            // 'hair_salon_name'          => 'required|max:255',
-            // 'hair_salon_postal_code'   => 'required|int|max:255',
-            // 'hair_salon_prefecture'    => 'required|string|max:255',
-            // 'hair_salon_municipality'  => 'required|string|max:255',
-            // 'hair_salon_street_number' => 'required|string|max:255',
-            // 'hair_salon_building_name' => 'string|max:255',
+            'base_id'                     => 'required|int|exists:bases,id',
         ];
     }
 }

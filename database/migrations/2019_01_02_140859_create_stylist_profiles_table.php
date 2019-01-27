@@ -16,6 +16,7 @@ class CreateStylistProfilesTable extends Migration
         Schema::create('stylist_profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('base_id')->unsigned();
             $table->text('introduction');
             $table->dateTime('birth_date');
             $table->integer('sex');

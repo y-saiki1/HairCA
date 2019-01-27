@@ -41,7 +41,7 @@ class AuthenticateInvitationUseCase
      */
     public function __invoke(string $emailAddress, string $invitationToken): Account
     {
-        $guest = $this->StylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
+        $guest = $this->stylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
 
         try {
             $account = $this->accountQuery->findAccountByEmailAddress($guest->emailAddress());

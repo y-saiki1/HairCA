@@ -51,7 +51,7 @@ class CreateStylistUseCase
         $guest = $this->stylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
         
         $stylist = $this->stylistCommand->saveStylist($name, $guest->emailAddress(), $password);
-        $this->stylistCommand->saveStylistProfile($stylist->id(), $guest);
+        $this->stylistCommand->saveRecommender($stylist->id(), $guest);
 
         return $this->accountQuery->login($stylist->emailAddress(), $password);
     }

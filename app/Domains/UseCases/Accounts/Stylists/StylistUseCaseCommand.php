@@ -2,10 +2,13 @@
 
 namespace App\Domains\UseCases\Accounts\Stylists;
 
+// --- Domain ---
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Guest\Guest;
 use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Profile\BirthDate;
+use App\Domains\Models\Profile\Sex;
 
 interface StylistUseCaseCommand
 {
@@ -26,18 +29,20 @@ interface StylistUseCaseCommand
     public function saveStylist(string $name, string $emailAddress, string $password): Stylist;
 
     /**
+     * Guestsテーブルに保存していた推薦文などをRecommenderテーブルに移行する(本登録)
      * @param int スタイリストID
      * @param Guest ゲスト
+     * @return bool
      */
-    public function saveStylistProfile(int $accountId, Guest $guest): bool;
+    public function saveRecommender(int $accountId, Guest $guest): bool;
     
     /**
      * @param int アカウントID
      * @param string 自己紹介文
-     * @param DateTime 生年月日
-     * @param int 性別
-     * @param string 都道府県
+     * @param int 活動拠点ID 
+     * @param BirthDate 生年月日
+     * @param Sex 性別
      * @return bool
      */
-    public function updateStylistProfile(int $accountId, string $introduction, \DateTime $birthDate, int $sex, string $prefecture): bool;
+    public function saveStylistProfile(int $accountId, string $introduction, int $baseId, BirthDate $birthDate, Sex $sex): bool;
 }

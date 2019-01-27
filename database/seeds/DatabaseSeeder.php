@@ -72,13 +72,18 @@ class DatabaseSeeder extends Seeder
         Schema::table('stylist_profiles', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('base_id')->references('id')
+                ->on('bases')->onUpdate('cascade');
         });
 
+        // ヘアサロン
         Schema::table('hair_salons', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
 
+        // 推薦者
         Schema::table('recommenders', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade')->onUpdate('cascade');

@@ -2,22 +2,30 @@
 
 namespace App\Infrastructures\Repositories\Eloquents\Stylists;
 
+// --- Application ---
 use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Hashing\Hasher;
 use Carbon\Carbon;
 
+// --- Domain ---
+// Exceptions
 use App\Domains\Exceptions\NotExistsException;
-
+// Models
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Guest\Guest;
 use App\Domains\Models\Account\Stylist\StylistProfile;
-
+use App\Domains\Models\Profile\BirthDate;
+use App\Domains\Models\Profile\Sex;
+// UseCases
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 
+// --- Infra ---
+// Entities
 use App\Infrastructures\Entities\Eloquents\EloquentUser;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
+use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
 
 class EloquentStylistCommandRepository implements StylistUseCaseCommand
 {
@@ -30,6 +38,11 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
      * @var EloquentUser
      */
     private $eloquentUser;
+
+    /**
+     * @var EloquentRecommender
+     */
+    private $eloquentRecommender;
 
     /**
      * @var EloquentStylistProfile
@@ -50,11 +63,13 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
     public function __construct(
         EloquentGuest $eloquentGuest,
         EloquentUser $eloquentUser,
+        EloquentRecommender $eloquentRecommender,
         EloquentStylistProfile $eloquentStylistProfile,
         Hasher $accountPasswordHasher
     ) {
         $this->eloquentGuest = $eloquentGuest;
         $this->eloquentUser = $eloquentUser;
+        $this->eloquentRecommender = $eloquentRecommender;
         $this->eloquentStylistProfile = $eloquentStylistProfile;
         $this->accountPasswordHasher = $accountPasswordHasher;
     }
@@ -116,34 +131,35 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
     }
 
     /**
+     * Guestsテーブルに保存していた推薦文などをRecommenderテーブルに移行する(本登録)
      * @param int スタイリストID
      * @param Guest ゲスト
+     * @return bool
      */
-    public function saveStylistProfile(int $accountId, Guest $guest): bool
+    public function saveRecommender(int $accountId, Guest $guest): bool
     {
-        $this->EloquentStylistProfile->user_id = $accountId;
-        $this->EloquentStylistProfile->recommender_id = $guest->recommender()->id();
-        $this->EloquentStylistProfile->recommendation = $guest->recommender()->recommendation();
+        $this->eloquentRecommender->user_id = $accountId;
+        $this->eloquentRecommender->recommender_id = $guest->recommender()->id();
+        $this->eloquentRecommender->recommendation = $guest->recommender()->recommendation();
         
-        return $this->EloquentStylistProfile->save();
+        return $this->eloquentRecommender->save();
     }
 
     /**
      * @param int アカウントID
      * @param string 自己紹介文
-     * @param DateTime 生年月日
-     * @param int 性別
-     * @param string 都道府県
+     * @param int 活動拠点ID 
+     * @param BirthDate 生年月日
+     * @param Sex 性別
      * @return bool
      */
-    public function updateStylistProfile(int $accountId, string $introduction, \DateTime $birthDate, int $sex, string $prefecture): bool
+    public function saveStylistProfile(int $accountId, string $introduction, int $baseId, BirthDate $birthDate, Sex $sex): bool
     {
-        $this->EloquentStylistProfile->user_id = $user->id;
-        $this->EloquentStylistProfile->recommender_id = $guest->recommender()->id();
-        $this->EloquentStylistProfile->recommendation = $guest->recommender()->recommendation();
+        $this->EloquentStylistProfile->user_id = $accountId;
         $this->EloquentStylistProfile->introduction = $introduction;
-        $this->EloquentStylistProfile->age = $age;
-        $this->EloquentStylistProfile->sex = $sex;
+        $this->EloquentStylistProfile->base_id = $baseId;
+        $this->EloquentStylistProfile->birth_date = $birthDate->formatYMD();
+        $this->EloquentStylistProfile->sex = $sex->asInt();
 
         return $this->EloquentStylistProfile->save();
     }
