@@ -10,4 +10,5 @@ class EloquentBase extends Model
      * @var string
      */
     protected $table = 'bases';
+    protected $fillable = ['name'];
 }

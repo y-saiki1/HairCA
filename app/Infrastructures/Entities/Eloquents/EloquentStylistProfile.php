@@ -25,24 +25,24 @@ class EloquentStylistProfile extends Model
 
     ];
 
-    public function recommender(): Recommender
-    {
-        $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentUser', 'recommender_id')->first();
+    // public function recommender(): Recommender
+    // {
+    //     $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist', 'recommender_id')->first();
         
-        return new Recommender(
-            $stylist->id(),
-            $stylist->name()
-        );
-    }
+    //     return new Recommender(
+    //         $stylist->id(),
+    //         $stylist->name()
+    //     );
+    // }
 
-    public function toDomain()
-    {
-        return new StylistProfile(
-            $this->recommender(),
-            $this->recommendation,
-            $this->introduction ? $this->introduction : null,
-            $this->birth_date ? new \DateTime($this->birth_date) : null,
-            $this->sex ? $this->sex : null
-        );
-    }
+    // public function toDomain()
+    // {
+    //     return new StylistProfile(
+    //         $this->recommender(),
+    //         $this->recommendation,
+    //         $this->introduction ? $this->introduction : null,
+    //         $this->birth_date ? new \DateTime($this->birth_date) : null,
+    //         $this->sex ? $this->sex : null
+    //     );
+    // }
 }

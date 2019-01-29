@@ -14,7 +14,7 @@ use App\Domains\Models\Account\Guest\Guest;
 use App\Domains\Models\Hash;
 use App\Domains\Models\JWT\JsonWebToken;
 
-use App\Infrastructures\Entities\Eloquents\EloquentUser;
+use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 
 class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
@@ -25,24 +25,24 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
     private $authManager;
 
     /**
-     * @var EloqeuntUser Eloqeuntユーザー
+     * @var EloquentAccount
      */
-    private $eloquentUser;
+    private $eloquentAccount;
 
     /**
-     * @var EloqeuntGuest Eloqeuntゲスト
+     * @var EloqeuntGuest
      */
     private $eloquentGuest;
 
     /**
      * @param AuthManager Laravelの認証クラス
-     * @param EloquentUser eloquentUser
-     * @param EloquentGuest eloquentGuest
+     * @param EloquentAccount
+     * @param EloquentGuest
      */
-    public function __construct(AuthManager $authManager, EloquentUser $eloquentUser, EloquentGuest $eloquentGuest)
+    public function __construct(AuthManager $authManager, EloquentAccount $eloquentAccount, EloquentGuest $eloquentGuest)
     {
         $this->authManager = $authManager;
-        $this->eloquentUser = $eloquentUser;
+        $this->eloquentAccount = $eloquentAccount;
         $this->eloquentGuest = $eloquentGuest;
     }
 
@@ -85,7 +85,7 @@ class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
      */
     public function findAccountByEmailAddress(string $emailAddress): Account
     {
-        $account =  $this->eloquentUser
+        $account =  $this->eloquentAccount
             ->where('email', $emailAddress)
             ->first();
 

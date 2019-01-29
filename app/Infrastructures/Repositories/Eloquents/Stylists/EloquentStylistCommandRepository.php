@@ -22,7 +22,7 @@ use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 
 // --- Infra ---
 // Entities
-use App\Infrastructures\Entities\Eloquents\EloquentUser;
+use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
@@ -35,9 +35,9 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
     private $eloquentGuest;
 
     /**
-     * @var EloquentUser
+     * @var EloquentAccount
      */
-    private $eloquentUser;
+    private $eloquentAccount;
 
     /**
      * @var EloquentRecommender
@@ -56,19 +56,19 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
 
     /**
      * @param EloquentGuest
-     * @param EloquentUser
+     * @param EloquentAccount
      * @param EloquentStylistProfile
      * @param Hasher
      */
     public function __construct(
         EloquentGuest $eloquentGuest,
-        EloquentUser $eloquentUser,
+        EloquentAccount $eloquentAccount,
         EloquentRecommender $eloquentRecommender,
         EloquentStylistProfile $eloquentStylistProfile,
         Hasher $accountPasswordHasher
     ) {
         $this->eloquentGuest = $eloquentGuest;
-        $this->eloquentUser = $eloquentUser;
+        $this->EloquentAccount = $eloquentAccount;
         $this->eloquentRecommender = $eloquentRecommender;
         $this->eloquentStylistProfile = $eloquentStylistProfile;
         $this->accountPasswordHasher = $accountPasswordHasher;
@@ -110,7 +110,7 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
      */
     public function saveStylist(string $name, string $emailAddress, string $password): Stylist
     {
-        $user = $this->eloquentUser->firstOrNew(
+        $user = $this->eloquentAccount->firstOrNew(
             [
                 'email'     => $emailAddress,
                 'password'  => $this->accountPasswordHasher->make($password),
@@ -122,6 +122,7 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
         );
 
         if (! $user->wasRecentlyCreated) {
+            $user->role_id = Stylist::ACCOUNT_TYPE;
             $user->updated_at = Carbon::now();
         }
         
@@ -155,12 +156,12 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
      */
     public function saveStylistProfile(int $accountId, string $introduction, int $baseId, BirthDate $birthDate, Sex $sex): bool
     {
-        $this->EloquentStylistProfile->user_id = $accountId;
-        $this->EloquentStylistProfile->introduction = $introduction;
-        $this->EloquentStylistProfile->base_id = $baseId;
-        $this->EloquentStylistProfile->birth_date = $birthDate->formatYMD();
-        $this->EloquentStylistProfile->sex = $sex->asInt();
+        $this->eloquentStylistProfile->user_id = $accountId;
+        $this->eloquentStylistProfile->introduction = $introduction;
+        $this->eloquentStylistProfile->base_id = $baseId;
+        $this->eloquentStylistProfile->birth_date = $birthDate->formatYMD();
+        $this->eloquentStylistProfile->sex = $sex->asInt();
 
-        return $this->EloquentStylistProfile->save();
+        return $this->eloquentStylistProfile->save();
     }
 }

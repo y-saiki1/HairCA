@@ -15,7 +15,7 @@ class CreateBasesTable extends Migration
     {
         Schema::create('bases', function (Blueprint $table) {
             $table->increments('id');
-            $table->name('base_name');
+            $table->string('name');
             $table->timestamps();
         });
     }

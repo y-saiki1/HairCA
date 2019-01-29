@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Entities\Eloquents;
+namespace App\Infrastructures\Entities\Eloquents\EloquentAccounts;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +12,7 @@ use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\StylistProfile;
 
-class EloquentUser extends Authenticatable implements JWTSubject
+class EloquentAccount extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -53,33 +53,6 @@ class EloquentUser extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
-    }
-
-    /**
-     * 1対１ スタイリストのプロフィール取得
-     * @return StylistProfile
-     * @throws StylistProfileNotExistsException
-     */
-    public function myStylistProfile(): StylistProfile
-    {
-        $stylistProfile = $this
-            ->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')
-            ->first();
-
-        // $hasStylistProfile = true;
-        // if (! $stylistProfile) $hasStylistProfile = false;
-        // elseif (! $stylistProfile->sex) $hasStylistProfile = false;
-        // elseif (! $stylistProfile->birth_date) $hasStylistProfile = false;
-        // elseif (! $stylistProfile->prefecture) $hasStylistProfile = false;
-
-        if (! $stylistProfile) {
-            throw new StylistProfileNotExistsException(
-                'Please create Stylist Profile this Account',
-                StylistProfileNotExistsException::ERROR_CODE
-            );
-        }
-
-        return $stylistProfile->toDomain();
     }
  
     /**

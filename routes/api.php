@@ -12,16 +12,30 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['middleware' => 'api'], function ($router) {
-    // Account
-    Route::post('/auth/login', 'Auth\\LoginAction');
+// Do not need JWT
+Route::middleware(['api'])->group(function () {
+    // Auth
+    Route::namespace('Auth')->group(function () {
+        Route::post('/auth/login', 'LoginAction');
+    });
+    
+    // Base
+    Route::namespace('Bases')->group(function () {
+        Route::get('/bases', 'IndexAction');
+    });
 
     // Stylist
-    Route::post('/accounts/stylists',        'Accounts\\Stylists\\CreateStylistAction');
-    Route::post('/accounts/stylists/invite', 'Accounts\\Stylists\\InviteAction')->middleware('auth:api');
-    Route::post('/accounts/stylists/auth',   'Accounts\\Stylists\\AuthenticateInvitationAction');
-    
-    // StylistProfile
-    Route::post('/accounts/stylists/profiles', 'Accounts\\Stylists\\CreateStylistProfileAction')->middleware('auth:api');
+    Route::namespace('Accounts\\Stylists')->group(function () {
+        Route::post('/accounts/stylists',        'CreateStylistAction');
+        Route::post('/accounts/stylists/auth',   'AuthenticateInvitationAction');
+    });
+});
+
+// Need JWT 
+Route::middleware(['api', 'auth:api'])->group(function () {
+    // Stylist
+    Route::namespace('Accounts\\Stylists')->group(function () {
+        Route::post('/accounts/stylists/invite', 'InviteAction');
+        Route::post('/accounts/stylists/profiles', 'CreateStylistProfileAction');
+    });
 });

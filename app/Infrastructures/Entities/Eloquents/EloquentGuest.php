@@ -24,7 +24,7 @@ class EloquentGuest extends Model
 
     public function recommender(string $recommendation): Recommender
     {
-        $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentUser', 'user_id')->first();
+        $stylist = $this->belongsTo('App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist', 'user_id')->first();
         return new Recommender(
             $stylist->id,
             $stylist->name,

@@ -38,10 +38,10 @@ class CreateStylistAction extends Controller
      */
     public function __invoke(
         CreateStylistRequest $request,
-        CreateStylistUseCase $createAccountUseCase,
+        CreateStylistUseCase $createStylistUseCase,
         TokenResponder $responder
     ) {
-        $jwt = $createAccountUseCase(
+        $jwt = $createStylistUseCase(
             $request->name,
             $request->email,
             $request->password,
