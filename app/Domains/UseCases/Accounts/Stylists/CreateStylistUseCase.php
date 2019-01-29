@@ -3,6 +3,7 @@
 namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\JWT\JsonWebToken;
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
@@ -46,7 +47,7 @@ class CreateStylistUseCase
      * @param string 招待トークン
      * @return JsonWebToken jwt返却
      */
-    public function __invoke(string $name, string $emailAddress, string $password, string $invitationToken) 
+    public function __invoke(string $name, string $emailAddress, string $password, string $invitationToken): JsonWebToken
     {
         $guest = $this->stylistQuery->findGuestByEmailAddressAndToken($emailAddress, $invitationToken);
         

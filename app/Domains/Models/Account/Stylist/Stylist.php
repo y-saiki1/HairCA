@@ -16,21 +16,6 @@ class Stylist implements Account
     const ACCOUNT_TYPE_NAME = 'Stylist';
 
     /**
-     * @var int アカウントID
-     */
-    private $id;
-
-    /**
-     * @var string アカウント名
-     */
-    private $name;
-
-    /**
-     * @var string メールアドレス
-     */
-    private $emailAddress;
-
-    /**
      * @param string メールアドレス
      * @param string 推薦文
      */

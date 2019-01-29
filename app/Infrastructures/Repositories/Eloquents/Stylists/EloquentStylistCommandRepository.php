@@ -3,7 +3,6 @@
 namespace App\Infrastructures\Repositories\Eloquents\Stylists;
 
 // --- Application ---
-use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Hashing\Hasher;
 use Carbon\Carbon;
 

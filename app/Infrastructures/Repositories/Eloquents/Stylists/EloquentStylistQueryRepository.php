@@ -8,7 +8,7 @@ use App\Domains\Models\Account\Guest\Guest;
 
 use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 
-use App\Infrastructures\Entities\Eloquents\EloquentUser;
+use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 
@@ -17,7 +17,7 @@ class EloquentStylistQueryRepository implements StylistUseCaseQuery
     /**
      * @var EloqeuntUser Eloqeuntユーザー
      */
-    private $eloquentUser;
+    private $eloquentStylist;
 
     /**
      * @var EloqeuntGuest Eloqeuntゲスト
@@ -25,12 +25,12 @@ class EloquentStylistQueryRepository implements StylistUseCaseQuery
     private $eloquentGuest;
 
     /**
-     * @param EloquentUser eloquentUser
+     * @param EloquentStylist EloquentStylist
      * @param EloquentGuest eloquentGuest
      */
-    public function __construct(EloquentUser $eloquentUser, EloquentGuest $eloquentGuest)
+    public function __construct(EloquentStylist $eloquentStylist, EloquentGuest $eloquentGuest)
     {
-        $this->eloquentUser = $eloquentUser;
+        $this->eloquentStylist = $eloquentStylist;
         $this->eloquentGuest = $eloquentGuest;
     }
 

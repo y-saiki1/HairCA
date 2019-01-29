@@ -14,14 +14,14 @@ class TokenResponder
      */
     public function __invoke($jwt): JsonResponse
     {
-        if (! $jwt) {
-            return new JsonResponse(
-                [
-                    'message' => 'Unauthrized',
-                ], 
-                Response::HTTP_UNAUTHORIZED
-            );
-        }
+        // if (! $jwt) {
+        //     return new JsonResponse(
+        //         [
+        //             'message' => 'Unauthrized',
+        //         ], 
+        //         Response::HTTP_UNAUTHORIZED
+        //     );
+        // }
 
         return new JsonResponse(
             [

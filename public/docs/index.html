@@ -158,6 +158,89 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/bases</code></p>
 <!-- END_4e740ed097ab5a038b83f4aa2579ea14 -->
+<h1>Member</h1>
+<!-- START_ea4a86a2ebf8f6c1973d97ed30209227 -->
+<h2>Create Member</h2>
+<p>一般ユーザー作成</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/accounts/members" \
+    -H "Authorization: Bearer {token}" \
+    -d "name"="アカウント名" \
+    -d "email"="example@exam.com" \
+    -d "password"="password" \
+    -d "password_confirmation"="password" </code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/accounts/members");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+let body = JSON.stringify({
+    "name": "アカウント名",
+    "email": "example@exam.com",
+    "password": "password",
+    "password_confirmation": "password",
+})
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "access_token": "token",
+    "token_type": "bearer",
+    "expires_in": 3600
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/accounts/members</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>required</td>
+<td>アカウント名</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+<td>ログインするアカウントのメールアドレス</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>required</td>
+<td>パスワード</td>
+</tr>
+<tr>
+<td>password_confirmation</td>
+<td>string</td>
+<td>required</td>
+<td>確認パスワード</td>
+</tr>
+</tbody>
+</table>
+<!-- END_ea4a86a2ebf8f6c1973d97ed30209227 -->
 <h1>Stylist</h1>
 <!-- START_fe4538154eb1c4d5a122a259d9a295b1 -->
 <h2>Create Stylist</h2>

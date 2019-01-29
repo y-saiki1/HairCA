@@ -138,6 +138,72 @@ fetch(url, {
 
 <!-- END_4e740ed097ab5a038b83f4aa2579ea14 -->
 
+#Member
+<!-- START_ea4a86a2ebf8f6c1973d97ed30209227 -->
+## Create Member
+
+一般ユーザー作成
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/accounts/members" \
+    -H "Authorization: Bearer {token}" \
+    -d "name"="アカウント名" \
+    -d "email"="example@exam.com" \
+    -d "password"="password" \
+    -d "password_confirmation"="password" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/accounts/members");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+let body = JSON.stringify({
+    "name": "アカウント名",
+    "email": "example@exam.com",
+    "password": "password",
+    "password_confirmation": "password",
+})
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "access_token": "token",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+
+### HTTP Request
+`POST api/accounts/members`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    name | string |  required  | アカウント名
+    email | string |  required  | ログインするアカウントのメールアドレス
+    password | string |  required  | パスワード
+    password_confirmation | string |  required  | 確認パスワード
+
+<!-- END_ea4a86a2ebf8f6c1973d97ed30209227 -->
+
 #Stylist
 <!-- START_fe4538154eb1c4d5a122a259d9a295b1 -->
 ## Create Stylist

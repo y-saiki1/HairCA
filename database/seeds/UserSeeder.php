@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Infrastructures\Entities\Eloquents\EloquentUser;
+use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
 use App\Infrastructures\Entities\Eloquents\EloquentRole;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 use App\Infrastructures\Entities\Eloquents\EloquentHairSalon;
@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
      */
     public function run(
         EloquentRole $role,
-        EloquentUser $user,
+        EloquentAccount $user,
         EloquentStylistProfile $stylistProfile,
         EloquentHairSalon $hairSalon,
         EloquentRecommender $recommender,

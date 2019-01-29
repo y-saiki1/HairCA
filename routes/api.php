@@ -29,6 +29,11 @@ Route::middleware(['api'])->group(function () {
         Route::post('/accounts/stylists',        'CreateStylistAction');
         Route::post('/accounts/stylists/auth',   'AuthenticateInvitationAction');
     });
+
+    // Member
+    Route::namespace('Accounts\\Members')->group(function () {
+        Route::post('/accounts/members',        'CreateMemberAction');
+    });
 });
 
 // Need JWT 
