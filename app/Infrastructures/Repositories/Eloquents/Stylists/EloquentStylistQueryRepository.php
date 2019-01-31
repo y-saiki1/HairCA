@@ -11,6 +11,7 @@ use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
 use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
+use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
 
 class EloquentStylistQueryRepository implements StylistUseCaseQuery
 {
@@ -68,5 +69,16 @@ class EloquentStylistQueryRepository implements StylistUseCaseQuery
         if (! $guest) throw new NotExistsException('The Guest is not invited to have this Email', NotExistsException::ERROR_CODE);
 
         return $guest->toDoamin();
+    }
+
+    /**
+     * @param int アカウントID
+     */
+    public function findStylistProfileByAccountId(int $accountId): StylistProfile
+    {
+        // 以下を全てスタイリストプロフィールとする (Nullの可能性あり)
+        // find recommender
+        // find stylistprofile (Nullの可能性あり) (エラーを発生させる)
+        // find hairsalon (Nullの可能性あり) (エラーを発生させない try catche)
     }
 }

@@ -2,9 +2,6 @@
 
 namespace App\Infrastructures\Repositories\Eloquents\Members;
 
-// --- Application ---
-use Illuminate\Contracts\Hashing\Hasher;
-
 // --- Domain ---
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Models\Account\Member\Member;
@@ -21,20 +18,13 @@ class EloquentMemberQueryRepository implements MemberUseCaseQuery
     private $eloquentMember;
 
     /**
-     * @var Hasher
-     */
-    private $accountPasswordHasher;
-
-    /**
      * @param EloquentMember
      * @param Hasher
      */
     public function __construct(
-        EloquentMember $eloquentMember,
-        Hasher $accountPasswordHasher
+        EloquentMember $eloquentMember
     ) {
         $this->eloquentMember = $eloquentMember;
-        $this->accountPasswordHasher = $accountPasswordHasher;
     }
 
     /**
