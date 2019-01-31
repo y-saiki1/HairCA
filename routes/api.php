@@ -26,13 +26,14 @@ Route::middleware(['api'])->group(function () {
 
     // Stylist
     Route::namespace('Accounts\\Stylists')->group(function () {
-        Route::post('/accounts/stylists',        'CreateStylistAction');
-        Route::post('/accounts/stylists/auth',   'AuthenticateInvitationAction');
+        Route::post('/accounts/stylists', 'CreateStylistAction');
+        Route::post('/accounts/stylists/auth', 'AuthenticateInvitationAction');
     });
 
     // Member
     Route::namespace('Accounts\\Members')->group(function () {
-        Route::post('/accounts/members',        'CreateMemberAction');
+        Route::post('/accounts/members', 'CreateMemberAction');
+        Route::post('/accounts/members/memberToStylist', 'UpdateMemberToStylistAction');
     });
 });
 

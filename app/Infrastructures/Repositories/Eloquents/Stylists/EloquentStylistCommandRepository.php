@@ -67,7 +67,7 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
         Hasher $accountPasswordHasher
     ) {
         $this->eloquentGuest = $eloquentGuest;
-        $this->EloquentAccount = $eloquentAccount;
+        $this->eloquentAccount = $eloquentAccount;
         $this->eloquentRecommender = $eloquentRecommender;
         $this->eloquentStylistProfile = $eloquentStylistProfile;
         $this->accountPasswordHasher = $accountPasswordHasher;
@@ -112,11 +112,11 @@ class EloquentStylistCommandRepository implements StylistUseCaseCommand
         $user = $this->eloquentAccount->firstOrNew(
             [
                 'email'     => $emailAddress,
-                'password'  => $this->accountPasswordHasher->make($password),
             ],
             [
                 'name'      => $name,
                 'role_id'   => Stylist::ACCOUNT_TYPE,
+                'password'  => $this->accountPasswordHasher->make($password),
             ]
         );
 

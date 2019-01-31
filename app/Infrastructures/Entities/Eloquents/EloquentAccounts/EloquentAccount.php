@@ -7,10 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Domains\Exceptions\StylistProfileNotExistsException;
-
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Account\Member\Member;
 
 class EloquentAccount extends Authenticatable implements JWTSubject
 {
@@ -63,6 +63,14 @@ class EloquentAccount extends Authenticatable implements JWTSubject
     {
         if ($this->role_id === Stylist::ACCOUNT_TYPE) {
             $account = new Stylist(
+                $this->id,
+                $this->name,
+                $this->email
+            );
+        }
+
+        if ($this->role_id === Member::ACCOUNT_TYPE) {
+            $account = new Member(
                 $this->id,
                 $this->name,
                 $this->email

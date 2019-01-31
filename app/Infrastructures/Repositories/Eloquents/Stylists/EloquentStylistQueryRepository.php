@@ -39,6 +39,7 @@ class EloquentStylistQueryRepository implements StylistUseCaseQuery
      * @param string $email
      * @param string 招待トークン
      * @return Guest ゲスト
+     * @throws NotExistsException
      */
     public function findGuestByEmailAddressAndToken(string $emailAddress, string $invitationToken): Guest
     {

@@ -204,6 +204,68 @@ Parameter | Type | Status | Description
 
 <!-- END_ea4a86a2ebf8f6c1973d97ed30209227 -->
 
+<!-- START_8e0d791641329083d7028255d3e3c51b -->
+## Update Member To Stylist
+
+会員をスタイリストに更新する (招待された人が会員だった場合に使用すること)
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/accounts/members/memberToStylist" \
+    -H "Authorization: Bearer {token}" \
+    -d "email"="example@exam.com" \
+    -d "password"="password" \
+    -d "invitation_token"="token" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/accounts/members/memberToStylist");
+
+let headers = {
+    "Authorization": "Bearer {token}",
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+let body = JSON.stringify({
+    "email": "example@exam.com",
+    "password": "password",
+    "invitation_token": "token",
+})
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+{
+    "access_token": "token",
+    "token_type": "bearer",
+    "expires_in": 3600
+}
+```
+
+### HTTP Request
+`POST api/accounts/members/memberToStylist`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    email | string |  required  | ログインするアカウントのメールアドレス
+    password | string |  required  | パスワード
+    invitation_token | string |  required  | 招待メールに付いてくるトークン
+
+<!-- END_8e0d791641329083d7028255d3e3c51b -->
+
 #Stylist
 <!-- START_fe4538154eb1c4d5a122a259d9a295b1 -->
 ## Create Stylist
