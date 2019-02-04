@@ -55,7 +55,7 @@
 
 1. まずlaradock直下にいく。`cd hairca_dir/laradock`
 
-2.  直下で、次のコマンドを入力。「docker-compose exec mysql bash」
+2.  直下で、次のコマンドを入力。`docker-compose exec mysql bash`
 
 3. :警告:docker コンテナ内↓
 
@@ -69,7 +69,7 @@
 `create database hairca`
 `exit`
 
-5.  :警告:mysqldockerコンテナ内↓
+5.  :警告:dockerコンテナ内↓
 
 
 `exit`
