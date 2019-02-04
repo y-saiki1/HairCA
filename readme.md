@@ -27,7 +27,7 @@
 
 8.  slackに置いてある`.envファイル`を `hairca_dir/hairCA_laravel_API直下`に入れる。
 
-*:警告:ここからはdockerコンテナの中に入って作業するので、macとdockerコンテナのターミナルが別れていることに気をつけましょう。*
+**:警告:ここからはdockerコンテナの中に入って作業するので、macとdockerコンテナのターミナルが別れていることに気をつけましょう。**
 
 
 9.  laradock内で `docker-compose exec workspace bash` を実行。エラーが起こったら`docker-compose up -d workspace`を実行。
