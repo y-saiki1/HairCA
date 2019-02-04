@@ -17,6 +17,11 @@ class InviteAccountMail extends Mailable
     public $senderName;
 
     /**
+     * @var string 送信先アドレス
+     */
+    public $to;
+
+    /**
      * @var string 招待トークン
      */
     public $token;
@@ -31,9 +36,10 @@ class InviteAccountMail extends Mailable
      *
      * @return void
      */
-    public function __construct(string $senderName, string $token)
+    public function __construct(string $senderName, string $to, string $token)
     {
         $this->senderName = $senderName;
+        $this->to = $to;
         $this->token = $token;
     }
 

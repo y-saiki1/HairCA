@@ -12,6 +12,7 @@
         "laravel/tinker": "~1.0",
         "mpociot/laravel-apidoc-generator": "^3.2",
         "nesbot/carbon": "1.25.*",
+        "predis/predis": "^1.1",
         "tymon/jwt-auth": "1.0.0-rc.3",
         "zircote/swagger-php": "^3.0"
     },

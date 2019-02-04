@@ -3,6 +3,7 @@
 namespace App\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
+use App\Jobs\SendEmailJob;
 
 use App\Domains\Models\Account\Guest\Guest;
 
@@ -33,11 +34,10 @@ class LaravelMailer implements MailerUseCaseCommand
     {
         $inviteAccountMail = new InviteAccountMail(
             $guest->recommender()->name(),
+            $guest->emailAddress(),
             $guest->token()
         );
 
-        $this->mailer
-            ->to($guest->emailAddress())
-            ->send($inviteAccountMail);
+        SendEmailJob::dispatch($inviteAccountMail)->onQueue('invite_mail');
     }
 }
