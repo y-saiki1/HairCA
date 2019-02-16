@@ -1,59 +1,100 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Laravel環境構築
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+1.  `docker for macをいれた状態`で、`hairca_dirディレクトリ`を作成。
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+2.  `hairca_dirディレクトリ`に `laradock.zip` を入れ、解凍する。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+3.  解凍後、`laradockディレクトリ`が作成されている。`laradock.zip`を削除する。
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+4.  `laradockディレクトリ`の中に入る。
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-## Laravel Sponsors
+5.  `docker-compose up -d nginx mysql redis` を実行
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+6.  ビルド後、`laradock`と同階層で`gitlabのhairCA_laravel_API`をclone 
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7.  現在のディレクトリ構造↓
 
-## Security Vulnerabilities
+**hairca_dir/laradock**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+**hairca_dir/hairCA_laravel_API**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+8.  slackに置いてある`.envファイル`を `hairca_dir/hairCA_laravel_API直下`に入れる。
+
+**:警告:ここからはdockerコンテナの中に入って作業するので、macとdockerコンテナのターミナルが別れていることに気をつけましょう。**
+
+
+9.  laradock内で `docker-compose exec workspace bash` を実行。エラーが起こったら`docker-compose up -d workspace`を実行。
+
+
+10.   dockerコンテナの中に入れたら `cd hairCA_laravel_API` を実行。
+
+
+11.   `hairCA_laravel_API`の中で`composer install`を実行する。
+
+
+12.   終わったら、`php artisan list`を入力する。
+
+
+13.   問題なくコマンドヘルプが表示されたら完了です。
+
+
+14.   好きなブラウザで`http://localhost/docs/index.html` を叩くとドキュメントが表示されるのでこれでフロント開発に進めるはずです！
+
+# DB環境構築
+1.  なんかエラー出たぞコラァって人編
+
+
+1. まずlaradock直下にいく。`cd hairca_dir/laradock`
+
+2.  直下で、次のコマンドを入力。`docker-compose exec mysql bash`
+
+3. :警告:docker コンテナ内↓
+
+
+`mysql -u root -p`
+
+
+`パスワード入力を要求されるので 「root」と入れてください。`
+
+4.  :警告:mysql内↓
+`create database hairca`
+`exit`
+
+5.  :警告:dockerコンテナ内↓
+
+
+`exit`
+
+6.  ↑までできたらmacのターミナルまで戻ってきているはずです。
+
+7.  laradockの直下にいるはずなので、`docker-compose exec workspace bash`を実行。
+
+8.  :警告:docker コンテナ内↓
+
+
+`cd hairCA_laravel_API`
+
+
+`php artisan migrate --seed`
+
+
+`php artisan db:seed --class UserSeeder`
+
+
+上のコマンドを全てdockerコンテナ内で実行すること。
+
+9.  これでDBに伊藤カイジと遠藤さんの二人ができているはずです。
+
+11.  DBに登録されるユーザーの情報は以下に記載されています。
+
+
+`hairCA_laravel_API/database/seeds `
