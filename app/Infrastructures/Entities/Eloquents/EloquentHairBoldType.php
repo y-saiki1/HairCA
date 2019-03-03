@@ -4,7 +4,7 @@ namespace App\Infrastructures\Entities\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentHairColor extends Model
+class EloquentHairBoldType extends Model
 {
-    protected $table = 'hair_colors';
+    protected $table = 'hair_bold_types';
 }

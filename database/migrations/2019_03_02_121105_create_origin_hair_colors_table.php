@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStyleBookTagsTable extends Migration
+class CreateOriginHairColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateStyleBookTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('style_book_tags', function (Blueprint $table) {
+        Schema::create('origin_hair_colors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('style_book_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateStyleBookTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('style_book_tags');
+        Schema::dropIfExists('origin_hair_colors');
     }
 }

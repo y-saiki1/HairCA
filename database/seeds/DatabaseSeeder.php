@@ -25,13 +25,7 @@ class DatabaseSeeder extends Seeder
                 ->on('users')->onDelete('cascade')->onUpdate('cascade');
                 
             $table->foreign('style_book_repository_id')->references('id')
-                ->on('style_book_repositories')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('hair_style_id')->references('id')
-                ->on('hair_styles')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('hair_color_id')->references('id')
-                ->on('hair_colors')->onDelete('cascade')->onUpdate('cascade');
+                ->on('style_book_repositories')->onUpdate('cascade');
         });
 
         // style_book_repositories
@@ -40,13 +34,49 @@ class DatabaseSeeder extends Seeder
                 ->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        // style_book_tags
-        Schema::table('style_book_tags', function (Blueprint $table) {
+        // hair_style_models
+        Schema::table('hair_style_models', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->foreign('face_type_id')->references('id')
+                ->on('face_types')->onUpdate('cascade');
+            
+            $table->foreign('hair_type_id')->references('id')
+                ->on('hair_types')->onUpdate('cascade');
+            
+            $table->foreign('hair_bold_type_id')->references('id')
+                ->on('hair_bold_types')->onUpdate('cascade');
+
+            $table->foreign('hair_amount_type_id')->references('id')
+                ->on('hair_amount_types')->onUpdate('cascade');
+        });
+
+        // style_book_hair_style_models
+        Schema::table('style_book_hair_style_models', function (Blueprint $table) {
             $table->foreign('style_book_id')->references('id')
                 ->on('style_books')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->foreign('hair_style_model_id')->references('id')
+                ->on('hair_style_models')->onDelete('cascade')->onUpdate('cascade');
+        });
 
-            $table->foreign('tag_id')->references('id')
-                ->on('tags')->onDelete('cascade')->onUpdate('cascade');
+        // style_book_details
+        Schema::table('style_book_details', function (Blueprint $table) {
+            $table->foreign('style_book_id')->references('id')
+                ->on('style_books')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->foreign('origin_hair_color_id')->references('id')
+                ->on('origin_hair_colors')->onUpdate('cascade');
+
+            $table->foreign('about_hair_color_id')->references('id')
+                ->on('about_hair_colors')->onUpdate('cascade');
+
+            $table->foreign('detail_hair_color_id')->references('id')
+                ->on('detail_hair_colors')->onUpdate('cascade');
+
+            $table->foreign('hair_length_type_id')->references('id')
+                ->on('hair_length_types')->onUpdate('cascade');
         });
 
         /**
