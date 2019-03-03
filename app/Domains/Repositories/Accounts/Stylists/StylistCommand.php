@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace App\Domains\Repositories\Accounts\Stylists;
 
 // --- Domain ---
 use App\Domains\Models\Account\Account;
@@ -10,7 +10,7 @@ use App\Domains\Models\Account\Stylist\StylistProfile;
 use App\Domains\Models\Profile\BirthDate;
 use App\Domains\Models\Profile\Sex;
 
-interface StylistUseCaseCommand
+interface StylistCommand
 {
     /**
      * @param Guest ゲスト

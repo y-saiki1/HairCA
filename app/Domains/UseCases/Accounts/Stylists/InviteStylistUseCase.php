@@ -7,37 +7,37 @@ use App\Domains\Exceptions\NotStylistException;
 use App\Domains\Models\Hash;
 use App\Domains\Models\Account\Stylist\StylistProfile\Recommendation;
 
-use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\UseCase\Mailers\MailerCommand;
+use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
+use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
+use App\Domains\Repositories\Accounts\AccountQuery;
 
 class InviteStylistUseCase
 {   
     /**
-     * @var MailerUseCaseCommand メール操作UseCase
+     * @var MailerCommand メール操作
      */
     private $emailCommand;
 
     /**
-     * @var AccountUseCaseQuery アカウント操作UseCase
+     * @var AccountQuery アカウント操作
      */
     private $accountQuery;
 
     /**
-     * @var StylistUseCaseCommand アカウント操作UseCase
+     * @var StylistCommand アカウント操作
      */
     private $stylistCommand;
 
     /**
-     * @param AccountUseCaseQuery メール操作UseCase
-     * @param StylistUseCaseCommand アカウント操作UseCase
-     * @param StylistUseCaseQuery アカウント取得UseCase
+     * @param AccountQuery メール操作
+     * @param StylistCommand アカウント操作
+     * @param StylistQuery アカウント取得
      */
     public function __construct(
-        MailerUseCaseCommand $emailCommand,
-        AccountUseCaseQuery $accountQuery,
-        StylistUseCaseCommand $stylistCommand
+        MailerCommand $emailCommand,
+        AccountQuery $accountQuery,
+        StylistCommand $stylistCommand
     ) {
         $this->emailCommand = $emailCommand;
         $this->accountQuery = $accountQuery;

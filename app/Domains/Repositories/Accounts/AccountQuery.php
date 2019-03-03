@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts;
+namespace App\Domains\Repositories\Accounts;
 
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Exceptions\StylistProfileNotExistsException;
@@ -11,7 +11,7 @@ use App\Domains\Models\Account\Guest\Guest;
 use App\Domains\Models\JWT\JsonWebToken;
 use App\Domains\Models\Hash;
 
-interface AccountUseCaseQuery
+interface AccountQuery
 {
     /**
      * @param EmailAddress メールアドレス

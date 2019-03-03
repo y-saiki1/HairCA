@@ -3,26 +3,26 @@
 namespace App\Domains\UseCases\Accounts\Members;
 
 use App\Domains\Models\JWT\JsonWebToken;
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
-use App\Domains\UseCases\Accounts\Members\MemberUseCaseCommand;
+use App\Domains\Repositories\Accounts\AccountQuery;
+use App\Domains\Repositories\Accounts\Members\MemberCommand;
 
 class CreateMemberUseCase
 {
     /**
-     * @var MemberUseCaseCommand
+     * @var MemberCommand
      */
     private $memberCommand;
 
     /**
-     * @var AccountUseCaseQuery
+     * @var AccountQuery
      */
     private $accountQuery;
 
     /**
-     * @param MemberUseCaseCommand
-     * @param AccountUseCaseQuery
+     * @param MemberCommand
+     * @param AccountQuery
      */
-    public function __construct(AccountUseCaseQuery $accountQuery, MemberUseCaseCommand $memberCommand)
+    public function __construct(AccountQuery $accountQuery, MemberCommand $memberCommand)
     {
         $this->accountQuery = $accountQuery;
         $this->memberCommand = $memberCommand;

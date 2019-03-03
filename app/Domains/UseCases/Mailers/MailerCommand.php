@@ -4,7 +4,7 @@ namespace App\Domains\UseCases\Mailers;
 
 use App\Domains\Models\Account\Guest\Guest;
 
-interface MailerUseCaseCommand
+interface MailerCommand
 {
     /**
      * @param Guest ゲスト

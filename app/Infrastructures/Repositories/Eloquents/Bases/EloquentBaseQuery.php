@@ -2,11 +2,11 @@
 
 namespace App\Infrastructures\Repositories\Eloquents\Stylists;
 
-use App\Domains\UseCases\Bases\BaseQueryUseCase;
+use App\Domains\Repositories\Bases\BaseQuery;
 
 use App\Infrastructures\Entities\Eloquents\EloquentBase;
 
-class EloquentBaseQueryRepository implements BaseQueryUseCase
+class EloquentBaseQuery implements BaseQuery
 {
     /**
      * @var EloquentBase

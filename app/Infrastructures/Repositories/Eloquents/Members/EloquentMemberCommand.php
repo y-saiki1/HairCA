@@ -8,12 +8,12 @@ use Carbon\Carbon;
 
 // --- Domain ---
 use App\Domains\Models\Account\Member\Member;
-use App\Domains\UseCases\Accounts\Members\MemberUseCaseCommand;
+use App\Domains\Repositories\Accounts\Members\MemberCommand;
 
 // --- Infra ---
 use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
 
-class EloquentMemberCommandRepository implements MemberUseCaseCommand
+class EloquentMemberCommand implements MemberCommand
 {
     /**
      * @var EloquentAccount

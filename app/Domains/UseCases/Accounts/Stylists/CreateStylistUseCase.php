@@ -4,36 +4,36 @@ namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Account\Stylist\StylistProfile;
 use App\Domains\Models\JWT\JsonWebToken;
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
+use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
+use App\Domains\Repositories\Accounts\AccountQuery;
 
 class CreateStylistUseCase
 {
     /**
-     * @var AccountUseCaseQuery アカウント操作UseCase
+     * @var AccountQuery
      */
     private $accountQuery;
 
     /**
-     * @var StylistUseCaseCommand アカウント操作UseCase
+     * @var StylistCommand
      */
     private $stylistCommand;
 
     /**
-     * @var StylistUseCaseQuery アカウント取得UseCase
+     * @var StylistQuery
      */
     private $stylistQuery;
 
     /**
-     * @param AccountUseCaseQuery メール操作UseCase
-     * @param StylistUseCaseCommand アカウント操作UseCase
-     * @param StylistUseCaseQuery アカウント取得UseCase
+     * @param AccountQuery
+     * @param StylistCommand 
+     * @param StylistQuery
      */
     public function __construct(
-        AccountUseCaseQuery $accountQuery,
-        StylistUseCaseCommand $stylistCommand,
-        StylistUseCaseQuery $stylistQuery
+        AccountQuery $accountQuery,
+        StylistCommand $stylistCommand,
+        StylistQuery $stylistQuery
     ) {
         $this->accountQuery = $accountQuery;
         $this->stylistCommand = $stylistCommand;

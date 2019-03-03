@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accounts\Members;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Members\UpdateMemberToStylistRequest;
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\Repositories\Accounts\AccountQuery;
 use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
@@ -27,21 +27,21 @@ class UpdateMemberToStylistAction
      *  "expires_in": 3600
      * }
      * @param UpdateMemberToStylistRequest
-     * @param AccountUseCaseQuery
+     * @param AccountQuery
      * @param CreateStylistUseCase
      * @param TokenResponder
      */
     public function __invoke(
         UpdateMemberToStylistRequest $request,
         CreateStylistUseCase $createStylistUseCase,
-        AccountUseCaseQuery $accountUseCaseQuery,
+        AccountQuery $accountQuery,
         TokenResponder $tokenResponder
     ) {
-        $jwt = $accountUseCaseQuery->login(
+        $jwt = $accountQuery->login(
             $request->email,
             $request->password
         );
-        $account = $accountUseCaseQuery->myAccount();
+        $account = $accountQuery->myAccount();
         $createStylistUseCase(
             $account->name(),
             $account->emailAddress(),

@@ -4,28 +4,28 @@ namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Models\Account\Account;
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
+use App\Domains\Repositories\Accounts\AccountQuery;
 
 class AuthenticateInvitationUseCase
 {
     /**
-     * @var AccountUseCaseQuery アカウント操作UseCase
+     * @var AccountQuery
      */
     private $accountQuery;
 
     /**
-     * @var StylistUseCaseQuery アカウント取得UseCase
+     * @var StylistQuery
      */
     private $stylistQuery;
 
     /**
-     * @param AccountUseCaseQuery メール操作UseCase
-     * @param StylistUseCaseQuery アカウント取得UseCase
+     * @param AccountQuery
+     * @param StylistQuery 
      */
     public function __construct(
-        AccountUseCaseQuery $accountQuery,
-        StylistUseCaseQuery $stylistQuery
+        AccountQuery $accountQuery,
+        StylistQuery $stylistQuery
     ) {
         $this->accountQuery = $accountQuery;
         $this->stylistQuery = $stylistQuery;
@@ -33,7 +33,7 @@ class AuthenticateInvitationUseCase
 
     /**
      * 招待認証機能。
-     * ゲスト招待されており、すでに会員だったら自分のAccountを返す。
+     * ゲスト招待されており、すでに会員だったら自分のAccount(Member or Stylist)を返す。
      * 会員でなければゲストを返す。
      * @param string メールアドレス
      * @param string 招待トークン

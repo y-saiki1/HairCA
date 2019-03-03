@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Members;
+namespace App\Domains\Repositories\Accounts\Members;
 
 use App\Domains\Models\JWT\JsonWebToken;
 
-interface MemberUseCaseCommand
+interface MemberCommand
 {
     /**
      * @param string アカウント名

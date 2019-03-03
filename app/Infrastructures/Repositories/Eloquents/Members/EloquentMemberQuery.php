@@ -5,12 +5,12 @@ namespace App\Infrastructures\Repositories\Eloquents\Members;
 // --- Domain ---
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Models\Account\Member\Member;
-use App\Domains\UseCases\Accounts\Members\MemberUseCaseQuery;
+use App\Domains\Repositories\Accounts\Members\MemberQuery;
 
 // --- Infra ---
 use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentMember;
 
-class EloquentMemberQueryRepository implements MemberUseCaseQuery
+class EloquentMemberQuery implements MemberQuery
 {
     /**
      * @var EloquentMember

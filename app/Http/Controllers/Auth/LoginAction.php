@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Responders\Auth\TokenResponder;
 
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\Repositories\Accounts\AccountQuery;
 
 class LoginAction extends Controller
 {
@@ -54,10 +54,10 @@ class LoginAction extends Controller
     public function __invoke(
         LoginRequest $request, 
         TokenResponder $responder,
-        AccountUseCaseQuery $accountUseCaseQuery
+        AccountQuery $accountQuery
     ): JsonResponse
     {
-        $jwt = $accountUseCaseQuery->login(
+        $jwt = $accountQuery->login(
             $request->email,
             $request->password
         );

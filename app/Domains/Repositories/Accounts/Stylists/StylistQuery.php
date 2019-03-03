@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace App\Domains\Repositories\Accounts\Stylists;
 
 use App\Domains\Exceptions\NotExistsException;
 
@@ -8,7 +8,7 @@ use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Guest\Guest;
 
-interface StylistUseCaseQuery
+interface StylistQuery
 {
     /**
      * メールアドレスと招待トークンでGuestユーザー（招待されたユーザー）を検索し、Guestを返す

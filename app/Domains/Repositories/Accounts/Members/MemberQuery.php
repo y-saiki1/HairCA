@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Members;
+namespace App\Domains\Repositories\Accounts\Members;
 
 use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Models\JWT\JsonWebToken;
 use App\Domains\Models\Account\Member\Member;
 
-interface MemberUseCaseQuery
+interface MemberQuery
 {
     /**
      * @param string メールアドレス

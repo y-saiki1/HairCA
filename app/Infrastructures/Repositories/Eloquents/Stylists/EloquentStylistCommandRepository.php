@@ -17,7 +17,7 @@ use App\Domains\Models\Account\Stylist\StylistProfile;
 use App\Domains\Models\Profile\BirthDate;
 use App\Domains\Models\Profile\Sex;
 // UseCases
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseCommand;
+use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
 
 // --- Infra ---
 // Entities
@@ -26,7 +26,7 @@ use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
 
-class EloquentStylistCommandRepository implements StylistUseCaseCommand
+class EloquentStylistCommand implements StylistCommand
 {
     /**
      * @var EloquentGuest

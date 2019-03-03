@@ -6,7 +6,7 @@ use Illuminate\Auth\AuthManager;
 
 use App\Domains\Exceptions\NotExistsException;
 
-use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\Repositories\Accounts\AccountQuery;
 
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
@@ -17,7 +17,7 @@ use App\Domains\Models\JWT\JsonWebToken;
 use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 
-class AuthManagerAccountQueryRepository implements AccountUseCaseQuery
+class AuthManagerAccountQuery implements AccountQuery
 {
     /**
      * @var AuthManager Laravelの認証クラス

@@ -6,14 +6,14 @@ use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Guest\Guest;
 
-use App\Domains\UseCases\Accounts\Stylists\StylistUseCaseQuery;
+use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
 
 use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist;
 use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
 use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
 
-class EloquentStylistQueryRepository implements StylistUseCaseQuery
+class EloquentStylistQuery implements StylistQuery
 {
     /**
      * @var EloqeuntUser Eloqeuntユーザー
