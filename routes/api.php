@@ -26,14 +26,14 @@ Route::middleware(['api'])->group(function () {
 
     // Stylist
     Route::namespace('Accounts\\Stylists')->group(function () {
-        Route::post('/accounts/stylists', 'CreateStylistAction');
-        Route::post('/accounts/stylists/auth', 'AuthenticateInvitationAction');
+        Route::post('/accounts/stylists', CreateStylistAction::class);
+        Route::post('/accounts/stylists/auth', AuthenticateInvitationAction::class);
     });
 
     // Member
     Route::namespace('Accounts\\Members')->group(function () {
-        Route::post('/accounts/members', 'CreateMemberAction');
-        Route::post('/accounts/members/memberToStylist', 'UpdateMemberToStylistAction');
+        Route::post('/accounts/members', CreateMemberAction::class);
+        Route::post('/accounts/members/memberToStylist', UpdateMemberToStylistAction::class);
     });
 });
 
@@ -41,7 +41,11 @@ Route::middleware(['api'])->group(function () {
 Route::middleware(['api', 'auth:api'])->group(function () {
     // Stylist
     Route::namespace('Accounts\\Stylists')->group(function () {
-        Route::post('/accounts/stylists/invite', 'InviteAction');
-        Route::post('/accounts/stylists/profiles', 'CreateStylistProfileAction');
+        Route::post('/accounts/stylists/invite', InviteAction::class);
+    });
+
+    // StylistProfile
+    Route::namespace('Profiles\\StylistProfiles')->group(function () {
+        Route::post('/accounts/stylists/profiles', CreateStylistProfileAction::class);
     });
 });

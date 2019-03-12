@@ -164,6 +164,7 @@ return [
         // MyProvider
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\MailServiceProvider::class,
+        App\Providers\UseCaseServiceProvider::class,
     ],
 
     /*

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace App\Interactors\Accounts\Stylists;
 
 use App\Domains\Exceptions\NotStylistException;
 
 use App\Domains\Models\Hash;
-use App\Domains\Models\Account\Stylist\StylistProfile\Recommendation;
+use App\Domains\Models\Profile\StylistProfile\Recommendation;
 
-use App\Domains\UseCase\Mailers\MailerCommand;
 use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
 use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
 use App\Domains\Repositories\Accounts\AccountQuery;
 
-class InviteStylistUseCase
-{   
+use App\Domains\UseCases\Mailers\MailerCommand;
+use App\Domains\UseCases\Accounts\Stylists\IInviteStylistUseCase;
+
+class InviteStylistInteractor implements IInviteStylistUseCase
+{
     /**
      * @var MailerCommand メール操作
      */
@@ -49,6 +51,7 @@ class InviteStylistUseCase
      * @param string メールアドレス
      * @param string 推薦文
      * @return InvitationToken 招待トークン
+     * @throws NotStylistException
      */
     public function __invoke(string $emailAddress, string $recommendation): string 
     {

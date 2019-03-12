@@ -13,7 +13,7 @@ use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Guest\Guest;
-use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Profile\StylistProfile;
 use App\Domains\Models\Profile\BirthDate;
 use App\Domains\Models\Profile\Sex;
 // UseCases
@@ -153,13 +153,13 @@ class EloquentStylistCommand implements StylistCommand
      * @param Sex 性別
      * @return bool
      */
-    public function saveStylistProfile(int $accountId, string $introduction, int $baseId, BirthDate $birthDate, Sex $sex): bool
+    public function saveStylistProfile(int $baseId, StylistProfile $stylistProfile): bool
     {
-        $this->eloquentStylistProfile->user_id = $accountId;
-        $this->eloquentStylistProfile->introduction = $introduction;
+        $this->eloquentStylistProfile->user_id = $stylistProfile->stylistId();
+        $this->eloquentStylistProfile->introduction = $stylistProfile->introduction();
         $this->eloquentStylistProfile->base_id = $baseId;
-        $this->eloquentStylistProfile->birth_date = $birthDate->formatYMD();
-        $this->eloquentStylistProfile->sex = $sex->asInt();
+        $this->eloquentStylistProfile->birth_date = $stylistProfile->birthDate();
+        $this->eloquentStylistProfile->sex = $stylistProfile->sexAsInt();
 
         return $this->eloquentStylistProfile->save();
     }

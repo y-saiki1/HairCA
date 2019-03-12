@@ -2,8 +2,12 @@
 
 namespace App\Domains\Models\Profile;
 
+use App\Domains\Exceptions\NotExistsException;
+
 class Sex
 {
+    const MAN = 1;
+    const WOMAN = 2;
     /**
      * @var int
      */
@@ -14,7 +18,17 @@ class Sex
      */
     public function __construct(int $value)
     {
-        $this->value = $value;
+        if ($value === static::MAN) {
+            $this->value = $value;
+            return;
+        }
+
+        if ($value === static::WOMAN) {
+            $this->value = $value;
+            return;
+        }
+
+        throw new NotExistsException('User selected sex does not exists');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Domains\Exceptions;
 
-class StylistProfileNotExistsException extends \Exception
+class NotExistsStylistProfileException extends \Exception
 {
     /**
      * @var int スタイリストのプロフィールが存在しない

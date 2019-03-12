@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Members\UpdateMemberToStylistRequest;
 use App\Domains\Repositories\Accounts\AccountQuery;
-use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
+use App\Domains\UseCases\Accounts\Stylists\ICreateStylistUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
 class UpdateMemberToStylistAction
@@ -33,7 +33,7 @@ class UpdateMemberToStylistAction
      */
     public function __invoke(
         UpdateMemberToStylistRequest $request,
-        CreateStylistUseCase $createStylistUseCase,
+        ICreateStylistUseCase $createStylistUseCase,
         AccountQuery $accountQuery,
         TokenResponder $tokenResponder
     ) {
@@ -43,8 +43,7 @@ class UpdateMemberToStylistAction
         );
         $account = $accountQuery->myAccount();
         $createStylistUseCase(
-            $account->name(),
-            $account->emailAddress(),
+            $account,
             $request->password,
             $request->invitation_token
         );

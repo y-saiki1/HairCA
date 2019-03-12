@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Domains\Models\Account\Age;
 use App\Domains\Models\Account\Sex;
-use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Profile\StylistProfile;
 use App\Domains\Models\Account\Stylist\Recommender;
 
 class EloquentStylistProfile extends Model

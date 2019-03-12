@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accounts\Stylists;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Stylists\CreateStylistRequest;
-use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
+use App\Domains\UseCases\Accounts\Stylists\ICreateStylistUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
 class CreateStylistAction extends Controller
@@ -38,7 +38,7 @@ class CreateStylistAction extends Controller
      */
     public function __invoke(
         CreateStylistRequest $request,
-        CreateStylistUseCase $createStylistUseCase,
+        ICreateStylistUseCase $createStylistUseCase,
         TokenResponder $responder
     ) {
         $jwt = $createStylistUseCase(

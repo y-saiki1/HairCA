@@ -2,7 +2,7 @@
 
 namespace App\Domains\Exceptions;
 
-class NotExistsException extends \Exception
+class NotStylistException  extends \Exception
 {
     /**
      * @var int スタイリストではない

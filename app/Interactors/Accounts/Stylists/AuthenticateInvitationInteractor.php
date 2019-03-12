@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace App\Interactors\Accounts\Stylists;
 
-use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Models\Account\Account;
-use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
+use App\Domains\Exceptions\NotExistsException;
 use App\Domains\Repositories\Accounts\AccountQuery;
+use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
+use App\Domains\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
 
-class AuthenticateInvitationUseCase
+class AuthenticateInvitationInteractor implements AuthenticateInvitationUseCase
 {
     /**
      * @var AccountQuery

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Responders\Accounts\Stylists;
+namespace App\Http\Responders\Profiles\StylistProfiles;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 use App\Domains\Exceptions\StylistProfileNotExistsException;
 use App\Domains\Models\Account\Stylist\Stylist;
-use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Profile\StylistProfile;
 
 class EloquentStylist extends Model
 {

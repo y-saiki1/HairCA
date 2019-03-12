@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Members;
+namespace App\Interactors\Accounts\Members;
 
 use App\Domains\Models\JWT\JsonWebToken;
 use App\Domains\Repositories\Accounts\AccountQuery;
 use App\Domains\Repositories\Accounts\Members\MemberCommand;
+use App\Domains\UseCases\Accounts\Members\CreateMemberUseCase;
 
-class CreateMemberUseCase
+class CreateMemberInteractor implements CreateMemberUseCase
 {
     /**
      * @var MemberCommand

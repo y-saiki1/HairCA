@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace App\Interactors\Accounts\StylistProfiles;
 
 use App\Domains\Exceptions\NotStylistException;
 
-use App\Domains\Models\Account\Stylist\StylistProfile;
 use App\Domains\Models\Profile\BirthDate;
 use App\Domains\Models\Profile\Sex;
+
 use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
 use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
 use App\Domains\Repositories\Accounts\AccountQuery;
 
-class CreateStylistProfileUseCase
+use App\Domains\UseCases\Accounts\StylistProfiles\ICreateStylistProfileUseCase;
+
+class CreateStylistProfileInteractor implements ICreateStylistProfileUseCase
 {
     /**
      * @var AccountQuery
@@ -53,15 +55,15 @@ class CreateStylistProfileUseCase
      */
     public function __invoke(string $introduction, int $baseId, BirthDate $birthDate, Sex $sex): bool
     {
-        $account = $this->accountQuery->myAccount();
-        if ($account->isStylist()) throw new NotStylistException('Only Stylist Account can create Stylist Profile', NotStylistException::ERROR_CODE);
+        $stylist = $this->accountQuery->myAccount();
+        if (! $stylist->isStylist()) throw new NotStylistException('Only Stylist Account can create Stylist Profile', NotStylistException::ERROR_CODE);
 
-        return $this->stylistCommand->saveStylistProfile(
-            $account->id(),
+        $stylistProfile = $stylist->createProfile(
             $introduction,
-            $baseId,
             $birthDate,
             $sex
-        );
+        ); 
+
+        return $this->stylistCommand->saveStylistProfile($baseId, $stylistProfile);
     }
 }

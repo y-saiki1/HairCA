@@ -9,7 +9,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Domains\Exceptions\StylistProfileNotExistsException;
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
-use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Profile\StylistProfile;
 use App\Domains\Models\Account\Member\Member;
 
 class EloquentAccount extends Authenticatable implements JWTSubject

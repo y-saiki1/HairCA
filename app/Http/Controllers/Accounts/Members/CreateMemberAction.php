@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Accounts\Members;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Accounts\Members\CreateMemberRequest;
-use App\Domains\UseCases\Accounts\Members\CreateMemberUseCase;
+use App\Domains\UseCases\Accounts\Members\ICreateMemberUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
 class CreateMemberAction
@@ -29,8 +29,11 @@ class CreateMemberAction
      * @param CreateMemberUseCase
      * @param TokenResponder
      */
-    public function __invoke(CreateMemberRequest $request, CreateMemberUseCase $createMemberUseCase, TokenResponder $responder)
-    {
+    public function __invoke(
+        CreateMemberRequest $request,
+        ICreateMemberUseCase $createMemberUseCase,
+        TokenResponder $responder
+    ) {
         $jwt = $createMemberUseCase(
             $request->name,
             $request->email,

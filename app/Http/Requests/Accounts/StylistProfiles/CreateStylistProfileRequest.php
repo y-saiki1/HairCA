@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Accounts\Stylists;
+namespace App\Http\Requests\Accounts\StylistProfiles;
 
+use App\Rules\Accounts\Profiles\ExistsSex;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateStylistProfileRequest extends FormRequest
@@ -24,10 +25,10 @@ class CreateStylistProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'age'                      => 'required|int',
-            'sex'                      => 'required|int',
-            'introduction'             => 'required|string|max:600',
-            'base_id'                     => 'required|int|exists:bases,id',
+            'introduction' => ['required', 'max:600'],
+            'birth_date'   => ['required', 'date_format:Ymd'],
+            'sex'          => ['required', new ExistsSex],
+            'base_id'      => ['required', 'exists:bases,id']
         ];
     }
 }

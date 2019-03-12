@@ -6,7 +6,7 @@ namespace App\Domains\Repositories\Accounts\Stylists;
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\Account\Guest\Guest;
-use App\Domains\Models\Account\Stylist\StylistProfile;
+use App\Domains\Models\Profile\StylistProfile;
 use App\Domains\Models\Profile\BirthDate;
 use App\Domains\Models\Profile\Sex;
 
@@ -44,5 +44,5 @@ interface StylistCommand
      * @param Sex 性別
      * @return bool
      */
-    public function saveStylistProfile(int $accountId, string $introduction, int $baseId, BirthDate $birthDate, Sex $sex): bool;
+    public function saveStylistProfile(int $baseId, StylistProfile $stylistProfile): bool;
 }
