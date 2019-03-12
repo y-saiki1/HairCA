@@ -33,8 +33,9 @@ Welcome to the generated API reference.
 ```bash
 curl -X POST "http://localhost/api/auth/login" \
     -H "Authorization: Bearer {token}" \
-    -d "email"="example@exam.com" \
-    -d "password"="password" 
+    -H "Content-Type: application/json" \
+    -d '{"email":"example@exam.com","password":"password"}'
+
 ```
 
 ```javascript
@@ -42,14 +43,14 @@ const url = new URL("http://localhost/api/auth/login");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
+let body = {
     "email": "example@exam.com",
-    "password": "password",
-})
+    "password": "password"
+}
 
 fetch(url, {
     method: "POST",
@@ -149,10 +150,9 @@ fetch(url, {
 ```bash
 curl -X POST "http://localhost/api/accounts/members" \
     -H "Authorization: Bearer {token}" \
-    -d "name"="アカウント名" \
-    -d "email"="example@exam.com" \
-    -d "password"="password" \
-    -d "password_confirmation"="password" 
+    -H "Content-Type: application/json" \
+    -d '{"name":"\u30a2\u30ab\u30a6\u30f3\u30c8\u540d","email":"example@exam.com","password":"password","password_confirmation":"password"}'
+
 ```
 
 ```javascript
@@ -160,16 +160,16 @@ const url = new URL("http://localhost/api/accounts/members");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
-    "name": "アカウント名",
+let body = {
+    "name": "\u30a2\u30ab\u30a6\u30f3\u30c8\u540d",
     "email": "example@exam.com",
     "password": "password",
-    "password_confirmation": "password",
-})
+    "password_confirmation": "password"
+}
 
 fetch(url, {
     method: "POST",
@@ -214,9 +214,9 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/accounts/members/memberToStylist" \
     -H "Authorization: Bearer {token}" \
-    -d "email"="example@exam.com" \
-    -d "password"="password" \
-    -d "invitation_token"="token" 
+    -H "Content-Type: application/json" \
+    -d '{"email":"example@exam.com","password":"password","invitation_token":"token"}'
+
 ```
 
 ```javascript
@@ -224,15 +224,15 @@ const url = new URL("http://localhost/api/accounts/members/memberToStylist");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
+let body = {
     "email": "example@exam.com",
     "password": "password",
-    "invitation_token": "token",
-})
+    "invitation_token": "token"
+}
 
 fetch(url, {
     method: "POST",
@@ -279,11 +279,9 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/accounts/stylists" \
     -H "Authorization: Bearer {token}" \
-    -d "name"="アカウント名" \
-    -d "email"="example@exam.com" \
-    -d "password"="password" \
-    -d "password_confirmation"="password" \
-    -d "invitation_token"="token" 
+    -H "Content-Type: application/json" \
+    -d '{"name":"\u30a2\u30ab\u30a6\u30f3\u30c8\u540d","email":"example@exam.com","password":"password","password_confirmation":"password","invitation_token":"token"}'
+
 ```
 
 ```javascript
@@ -291,17 +289,17 @@ const url = new URL("http://localhost/api/accounts/stylists");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
-    "name": "アカウント名",
+let body = {
+    "name": "\u30a2\u30ab\u30a6\u30f3\u30c8\u540d",
     "email": "example@exam.com",
     "password": "password",
     "password_confirmation": "password",
-    "invitation_token": "token",
-})
+    "invitation_token": "token"
+}
 
 fetch(url, {
     method: "POST",
@@ -356,8 +354,9 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/accounts/stylists/auth" \
     -H "Authorization: Bearer {token}" \
-    -d "email"="example@exam.com" \
-    -d "invitation_token"="token" 
+    -H "Content-Type: application/json" \
+    -d '{"email":"example@exam.com","invitation_token":"token"}'
+
 ```
 
 ```javascript
@@ -365,14 +364,14 @@ const url = new URL("http://localhost/api/accounts/stylists/auth");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
+let body = {
     "email": "example@exam.com",
-    "invitation_token": "token",
-})
+    "invitation_token": "token"
+}
 
 fetch(url, {
     method: "POST",
@@ -418,8 +417,9 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/accounts/stylists/invite" \
     -H "Authorization: Bearer {token}" \
-    -d "email"="example@exam.com" \
-    -d "recommendation"="Laravelのドキュメント自動生成ツールまじで優秀" 
+    -H "Content-Type: application/json" \
+    -d '{"email":"example@exam.com","recommendation":"Laravel\u306e\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\u81ea\u52d5\u751f\u6210\u30c4\u30fc\u30eb\u307e\u3058\u3067\u512a\u79c0"}'
+
 ```
 
 ```javascript
@@ -427,14 +427,14 @@ const url = new URL("http://localhost/api/accounts/stylists/invite");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
+let body = {
     "email": "example@exam.com",
-    "recommendation": "Laravelのドキュメント自動生成ツールまじで優秀",
-})
+    "recommendation": "Laravel\u306e\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\u81ea\u52d5\u751f\u6210\u30c4\u30fc\u30eb\u307e\u3058\u3067\u512a\u79c0"
+}
 
 fetch(url, {
     method: "POST",
@@ -483,7 +483,7 @@ Parameter | Type | Status | Description
 <!-- END_1b3e3725dd2384ba7c12a125584307a3 -->
 
 <!-- START_e83ec4a27eb8294e71bfd7da2b7c2caf -->
-## Create StylistProfile
+## Create Stylist Profile
 
 スタイリストプロフィール作成
 
@@ -492,10 +492,9 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/accounts/stylists/profiles" \
     -H "Authorization: Bearer {token}" \
-    -d "introduction"="美容師。好きなヘアスタイルは五分刈り・七三分け・パンチパーマ" \
-    -d "base_id"="1" \
-    -d "birth_date"="19941111" \
-    -d "sex"="1" 
+    -H "Content-Type: application/json" \
+    -d '{"introduction":"'\u4ffa\u306f\u5929\u624d\u30b9\u30bf\u30ea\u30b9\u30c8'","birth_date":"19941111","sex":1,"base_id":1}'
+
 ```
 
 ```javascript
@@ -503,16 +502,16 @@ const url = new URL("http://localhost/api/accounts/stylists/profiles");
 
 let headers = {
     "Authorization": "Bearer {token}",
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
 }
 
-let body = JSON.stringify({
-    "introduction": "美容師。好きなヘアスタイルは五分刈り・七三分け・パンチパーマ",
-    "base_id": "1",
+let body = {
+    "introduction": "'\u4ffa\u306f\u5929\u624d\u30b9\u30bf\u30ea\u30b9\u30c8'",
     "birth_date": "19941111",
-    "sex": "1",
-})
+    "sex": 1,
+    "base_id": 1
+}
 
 fetch(url, {
     method: "POST",
@@ -523,12 +522,10 @@ fetch(url, {
     .then(json => console.log(json));
 ```
 
-> Example response (201):
+> Example response (200):
 
 ```json
-{
-    "message": "Stylist Profile created"
-}
+{}
 ```
 
 ### HTTP Request
@@ -538,10 +535,10 @@ fetch(url, {
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    introduction | string |  required  | 自己紹介orPR
-    base_id | string |  required  | 拠点ID
-    birth_date | string |  required  | 誕生日をyyyymmddの書式にすること
-    sex | string |  required  | 性別
+    introduction | string |  required  | 自己紹介文
+    birth_date | string |  required  | 生年月日
+    sex | integer |  required  | 性別：男 = 1, 女 = 2
+    base_id | integer |  required  | 拠点ID
 
 <!-- END_e83ec4a27eb8294e71bfd7da2b7c2caf -->
 
