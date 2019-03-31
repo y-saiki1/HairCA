@@ -4,18 +4,18 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\Repositories\Accounts\AccountQuery;
-use App\Infrastructures\Repositories\Applications\Auth\AuthManagerAccountQuery;
+use Packages\Domain\Repositories\Accounts\AccountQuery;
+use Packages\Infrastructures\Repositories\Applications\Auth\AuthManagerAccountQuery;
 
-use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
-use App\Infrastructures\Repositories\Eloquents\Stylists\EloquentStylistQuery;
-use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
-use App\Infrastructures\Repositories\Eloquents\Stylists\EloquentStylistCommand;
+use Packages\Domain\Repositories\Accounts\Stylists\StylistQuery;
+use Packages\Infrastructures\Repositories\Eloquents\Stylists\EloquentStylistQuery;
+use Packages\Domain\Repositories\Accounts\Stylists\StylistCommand;
+use Packages\Infrastructures\Repositories\Eloquents\Stylists\EloquentStylistCommand;
 
-use App\Domains\Repositories\Accounts\Members\MemberQuery;
-use App\Infrastructures\Repositories\Eloquents\Members\EloquentMemberQuery;
-use App\Domains\Repositories\Accounts\Members\MemberCommand;
-use App\Infrastructures\Repositories\Eloquents\Members\EloquentMemberCommand;
+use Packages\Domain\Repositories\Accounts\Members\MemberQuery;
+use Packages\Infrastructures\Repositories\Eloquents\Members\EloquentMemberQuery;
+use Packages\Domain\Repositories\Accounts\Members\MemberCommand;
+use Packages\Infrastructures\Repositories\Eloquents\Members\EloquentMemberCommand;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

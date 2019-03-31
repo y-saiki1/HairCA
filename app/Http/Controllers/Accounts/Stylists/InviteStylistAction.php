@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accounts\Stylists;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Stylists\InviteStylistRequest;
-use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
+use Packages\Domain\UseCases\Accounts\Stylists\InviteStylistUseCase;
 use App\Http\Responders\Accounts\Stylists\InviteStylistResponder;
 
 class InviteAction extends Controller

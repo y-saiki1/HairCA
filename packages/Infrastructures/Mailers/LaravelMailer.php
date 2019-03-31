@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Mailers;
+namespace Packages\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
 use App\Jobs\SendEmailJob;
@@ -8,7 +8,7 @@ use App\Jobs\SendEmailJob;
 use Packages\Domain\Models\Account\Guest\Guest;
 
 use Packages\Domain\UseCases\Mailers\MailerUseCaseCommand;
-use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
+use Packages\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
 
 class LaravelMailer implements MailerUseCaseCommand
 {

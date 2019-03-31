@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Responders\Auth\TokenResponder;
 
-use App\Domains\Repositories\Accounts\AccountQuery;
+use Packages\Domain\Repositories\Accounts\AccountQuery;
 
 class LoginAction extends Controller
 {

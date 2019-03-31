@@ -4,20 +4,20 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\UseCases\Accounts\Members\CreateMemberUseCase;
+use Packages\Domain\UseCases\Accounts\Members\CreateMemberUseCase;
 use App\Interactors\Accounts\Members\CreateMemberInteractor;
 
-use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
+use Packages\Domain\UseCases\Accounts\Stylists\CreateStylistUseCase;
 use App\Interactors\Accounts\Stylists\AuthenticateInvitationInteractor;
 
-use App\Domains\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
+use Packages\Domain\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
 use App\Interactors\Accounts\Stylists\CreateStylistInteractor;
 
-use App\Domains\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
+use Packages\Domain\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
 use App\Interactors\Accounts\StylistProfiles\CreateStylistProfileInteractor;
 
 
-use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
+use Packages\Domain\UseCases\Accounts\Stylists\InviteStylistUseCase;
 use App\Interactors\Accounts\Stylists\InviteStylistInteractor;
 
 class UseCaseServiceProvider extends ServiceProvider

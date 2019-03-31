@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interactors\Accounts\Stylists;
+namespace Packages\Interactors\Accounts\Stylists;
 
 use Packages\Domain\Exceptions\NotStylistException;
 

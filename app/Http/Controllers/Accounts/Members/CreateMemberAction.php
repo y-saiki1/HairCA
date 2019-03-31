@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Accounts\Members;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Accounts\Members\CreateMemberRequest;
-use App\Domains\UseCases\Accounts\Members\CreateMemberUseCase;
+use Packages\Domain\UseCases\Accounts\Members\CreateMemberUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
 class CreateMemberAction

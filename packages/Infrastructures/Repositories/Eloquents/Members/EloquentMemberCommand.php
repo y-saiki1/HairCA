@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Eloquents\Members;
+namespace Packages\Infrastructures\Repositories\Eloquents\Members;
 
 // --- Application ---
 use Illuminate\Contracts\Hashing\Hasher;
@@ -11,7 +11,7 @@ use Packages\Domain\Models\Account\Member\Member;
 use Packages\Domain\Repositories\Accounts\Members\MemberCommand;
 
 // --- Infra ---
-use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
+use Packages\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
 
 class EloquentMemberCommand implements MemberCommand
 {

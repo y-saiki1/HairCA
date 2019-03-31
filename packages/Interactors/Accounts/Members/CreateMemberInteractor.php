@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interactors\Accounts\Members;
+namespace Packages\Interactors\Accounts\Members;
 
 use Packages\Domain\Models\JWT\JsonWebToken;
 use Packages\Domain\Repositories\Accounts\AccountQuery;

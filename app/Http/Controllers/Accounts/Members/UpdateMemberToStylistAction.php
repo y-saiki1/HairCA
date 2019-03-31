@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Accounts\Members;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Members\UpdateMemberToStylistRequest;
-use App\Domains\Repositories\Accounts\AccountQuery;
-use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
+use Packages\Domain\Repositories\Accounts\AccountQuery;
+use Packages\Domain\UseCases\Accounts\Stylists\CreateStylistUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
 class UpdateMemberToStylistAction

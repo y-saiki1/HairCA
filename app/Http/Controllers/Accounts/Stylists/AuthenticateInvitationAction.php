@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Stylists\AuthenticateInvitationRequest;
-use App\Domains\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
+use Packages\Domain\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
 use App\Http\Responders\Accounts\Auth\AuthenticateInvitationResponder;
 
-use App\Domains\Models\Account\Guest\Guest;
-use App\Domains\Models\Hash;
+use Packages\Domain\Models\Account\Guest\Guest;
+use Packages\Domain\Models\Hash;
 
 class AuthenticateInvitationAction extends Controller
 {

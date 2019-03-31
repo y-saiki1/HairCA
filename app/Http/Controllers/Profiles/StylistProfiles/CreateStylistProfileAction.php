@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Profiles\StylistProfiles;
 
 use Illuminate\Http\Request;
-use App\Domains\Models\Profile\Sex;
+use Packages\Domain\Models\Profile\Sex;
 use App\Http\Controllers\Controller;
-use App\Domains\Models\Profile\BirthDate;
+use Packages\Domain\Models\Profile\BirthDate;
 use App\Http\Requests\Accounts\StylistProfiles\CreateStylistProfileRequest;
-use App\Domains\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
+use Packages\Domain\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
 use App\Http\Responders\Profiles\StylistProfiles\CreateStylistProfileResponder;
 
 class CreateStylistProfileAction extends Controller

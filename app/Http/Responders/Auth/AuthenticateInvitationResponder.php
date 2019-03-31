@@ -5,7 +5,7 @@ namespace App\Http\Responders\Accounts\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-use App\Domains\Models\Account\Account;
+use Packages\Domain\Models\Account\Account;
 
 class AuthenticateInvitationResponder
 {

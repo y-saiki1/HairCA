@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accounts\Stylists;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Stylists\CreateStylistRequest;
-use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
+use Packages\Domain\UseCases\Accounts\Stylists\CreateStylistUseCase;
 use App\Http\Responders\Auth\TokenResponder;
 
 class CreateStylistAction extends Controller

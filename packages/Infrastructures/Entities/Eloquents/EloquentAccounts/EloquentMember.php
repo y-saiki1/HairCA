@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Entities\Eloquents\EloquentAccounts;
+namespace Packages\Infrastructures\Entities\Eloquents\EloquentAccounts;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;

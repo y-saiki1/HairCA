@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Eloquents\Stylists;
+namespace Packages\Infrastructures\Repositories\Eloquents\Stylists;
 
 use Packages\Domain\Repositories\Bases\BaseQuery;
 
-use App\Infrastructures\Entities\Eloquents\EloquentBase;
+use Packages\Infrastructures\Entities\Eloquents\EloquentBase;
 
 class EloquentBaseQuery implements BaseQuery
 {

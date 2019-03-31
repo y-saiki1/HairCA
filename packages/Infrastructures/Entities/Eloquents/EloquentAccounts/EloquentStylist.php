@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Entities\Eloquents\EloquentAccounts;
+namespace Packages\Infrastructures\Entities\Eloquents\EloquentAccounts;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -55,7 +55,7 @@ class EloquentStylist extends Model
     public function myStylistProfile(): StylistProfile
     {
         $stylistProfile = $this
-            ->hasOne('App\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')
+            ->hasOne('Packages\Infrastructures\Entities\Eloquents\EloquentStylistProfile', 'user_id')
             ->first();
 
         if (! $stylistProfile) {

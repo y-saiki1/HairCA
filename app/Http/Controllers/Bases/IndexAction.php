@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 
-use App\Infrastructures\Entities\Eloquents\EloquentBase;
+use Packages\Infrastructures\Entities\Eloquents\EloquentBase;
 
 class IndexAction extends Controller
 {

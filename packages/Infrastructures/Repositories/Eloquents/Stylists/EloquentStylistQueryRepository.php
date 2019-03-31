@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Eloquents\Stylists;
+namespace Packages\Infrastructures\Repositories\Eloquents\Stylists;
 
 use Packages\Domain\Models\Account\Account;
 use Packages\Domain\Models\Account\Stylist\Stylist;
@@ -8,10 +8,10 @@ use Packages\Domain\Models\Account\Guest\Guest;
 
 use Packages\Domain\Repositories\Accounts\Stylists\StylistQuery;
 
-use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist;
-use App\Infrastructures\Entities\Eloquents\EloquentGuest;
-use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
-use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
+use Packages\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentStylist;
+use Packages\Infrastructures\Entities\Eloquents\EloquentGuest;
+use Packages\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
+use Packages\Infrastructures\Entities\Eloquents\EloquentRecommender;
 
 class EloquentStylistQuery implements StylistQuery
 {

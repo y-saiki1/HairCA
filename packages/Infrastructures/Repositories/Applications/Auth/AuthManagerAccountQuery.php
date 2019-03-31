@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Applications\Auth;
+namespace Packages\Infrastructures\Repositories\Applications\Auth;
 
 use Illuminate\Auth\AuthManager;
 
@@ -14,8 +14,8 @@ use Packages\Domain\Models\Account\Guest\Guest;
 use Packages\Domain\Models\Hash;
 use Packages\Domain\Models\JWT\JsonWebToken;
 
-use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
-use App\Infrastructures\Entities\Eloquents\EloquentGuest;
+use Packages\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
+use Packages\Infrastructures\Entities\Eloquents\EloquentGuest;
 
 class AuthManagerAccountQuery implements AccountQuery
 {

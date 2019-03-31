@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Eloquents\Members;
+namespace Packages\Infrastructures\Repositories\Eloquents\Members;
 
 // --- Domain ---
 use Packages\Domain\Exceptions\NotExistsException;
@@ -8,7 +8,7 @@ use Packages\Domain\Models\Account\Member\Member;
 use Packages\Domain\Repositories\Accounts\Members\MemberQuery;
 
 // --- Infra ---
-use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentMember;
+use Packages\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentMember;
 
 class EloquentMemberQuery implements MemberQuery
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Eloquents\Stylists;
+namespace Packages\Infrastructures\Repositories\Eloquents\Stylists;
 
 // --- Application ---
 use Illuminate\Contracts\Hashing\Hasher;
@@ -21,10 +21,10 @@ use Packages\Domain\Repositories\Accounts\Stylists\StylistCommand;
 
 // --- Infra ---
 // Entities
-use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
-use App\Infrastructures\Entities\Eloquents\EloquentGuest;
-use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
-use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
+use Packages\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
+use Packages\Infrastructures\Entities\Eloquents\EloquentGuest;
+use Packages\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
+use Packages\Infrastructures\Entities\Eloquents\EloquentRecommender;
 
 class EloquentStylistCommand implements StylistCommand
 {
