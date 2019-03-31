@@ -5,20 +5,20 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use Packages\Domain\UseCases\Accounts\Members\CreateMemberUseCase;
-use App\Interactors\Accounts\Members\CreateMemberInteractor;
+use Packages\Interactors\Accounts\Members\CreateMemberInteractor;
 
 use Packages\Domain\UseCases\Accounts\Stylists\CreateStylistUseCase;
-use App\Interactors\Accounts\Stylists\AuthenticateInvitationInteractor;
+use Packages\Interactors\Accounts\Stylists\AuthenticateInvitationInteractor;
 
 use Packages\Domain\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
-use App\Interactors\Accounts\Stylists\CreateStylistInteractor;
+use Packages\Interactors\Accounts\Stylists\CreateStylistInteractor;
 
 use Packages\Domain\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
-use App\Interactors\Accounts\StylistProfiles\CreateStylistProfileInteractor;
+use Packages\Interactors\Accounts\StylistProfiles\CreateStylistProfileInteractor;
 
 
 use Packages\Domain\UseCases\Accounts\Stylists\InviteStylistUseCase;
-use App\Interactors\Accounts\Stylists\InviteStylistInteractor;
+use Packages\Interactors\Accounts\Stylists\InviteStylistInteractor;
 
 class UseCaseServiceProvider extends ServiceProvider
 {
