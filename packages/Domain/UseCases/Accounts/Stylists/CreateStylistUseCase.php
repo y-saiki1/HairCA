@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace Packages\Domain\UseCases\Accounts\Stylists;
 
-use App\Domains\Models\Account\Account;
-use App\Domains\Models\JWT\JsonWebToken;
+use Packages\Domain\Models\Account\Account;
+use Packages\Domain\Models\JWT\JsonWebToken;
 
-interface ICreateStylistUseCase
+interface CreateStylistUseCase
 {
     /**
      * @param Account アカウント

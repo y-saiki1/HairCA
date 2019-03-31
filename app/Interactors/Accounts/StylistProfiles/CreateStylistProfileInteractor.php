@@ -11,9 +11,9 @@ use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
 use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
 use App\Domains\Repositories\Accounts\AccountQuery;
 
-use App\Domains\UseCases\Accounts\StylistProfiles\ICreateStylistProfileUseCase;
+use App\Domains\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
 
-class CreateStylistProfileInteractor implements ICreateStylistProfileUseCase
+class CreateStylistProfileInteractor implements CreateStylistProfileUseCase
 {
     /**
      * @var AccountQuery

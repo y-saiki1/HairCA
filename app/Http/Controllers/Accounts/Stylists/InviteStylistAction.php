@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Accounts\Stylists;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Accounts\Stylists\InviteStylistRequest;
-use App\Domains\UseCases\Accounts\Stylists\IInviteStylistUseCase;
+use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
 use App\Http\Responders\Accounts\Stylists\InviteStylistResponder;
 
 class InviteAction extends Controller
@@ -37,7 +37,7 @@ class InviteAction extends Controller
      */
     public function __invoke(
         InviteStylistRequest $request,
-        IInviteStylistUseCase $inviteStylistUseCase,
+        InviteStylistUseCase $inviteStylistUseCase,
         InviteStylistResponder $responder
     ) {
         $token = $inviteStylistUseCase(

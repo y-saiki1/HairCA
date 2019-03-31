@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\Stylists;
+namespace Packages\Domain\UseCases\Accounts\Stylists;
 
-use App\Domains\Exceptions\NotStylistException;
+use Packages\Domain\Exceptions\NotStylistException;
 
-interface IInviteStylistUseCase
+interface InviteStylistUseCase
 {
     /**
      * ユーザーに招待メールを送る。トークン作成・保存・メール送信。

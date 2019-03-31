@@ -15,7 +15,7 @@ use App\Infrastructures\Repositories\Eloquents\Stylists\EloquentStylistCommand;
 use App\Domains\Repositories\Accounts\Members\MemberQuery;
 use App\Infrastructures\Repositories\Eloquents\Members\EloquentMemberQuery;
 use App\Domains\Repositories\Accounts\Members\MemberCommand;
-use App\Infrastructures\Repositories\Eloquents\Members\EloquentMemberCommandRepository;
+use App\Infrastructures\Repositories\Eloquents\Members\EloquentMemberCommand;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

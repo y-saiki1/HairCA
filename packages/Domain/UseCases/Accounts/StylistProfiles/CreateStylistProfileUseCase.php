@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts\StylistProfiles;
+namespace Packages\Domain\UseCases\Accounts\StylistProfiles;
 
-use App\Domains\Exceptions\NotStylistException;
+use Packages\Domain\Exceptions\NotStylistException;
 
-use App\Domains\Models\Profile\BirthDate;
-use App\Domains\Models\Profile\Sex;
+use Packages\Domain\Models\Profile\BirthDate;
+use Packages\Domain\Models\Profile\Sex;
 
-interface ICreateStylistProfileUseCase
+interface CreateStylistProfileUseCase
 {
     /**
      * @param string 自己紹介文

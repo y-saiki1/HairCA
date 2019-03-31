@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Accounts\Stylists;
 
 use App\Http\Requests\Accounts\Stylists\CreateStylistProfileRequest;
-use App\Domains\UseCases\Accounts\Stylists\ICreateStylistProfileUseCase;
+use App\Domains\UseCases\Accounts\Stylists\CreateStylistProfileUseCase;
 use App\Http\Responders\Accounts\Stylists\CreateStylistProfileResponder;
 
 use App\Domains\Models\Profile\BirthDate;
@@ -32,7 +32,7 @@ class CreateStylistProfileAction
      */
     public function __invoke(
         CreateStylistProfileRequest $request,
-        ICreateStylistProfileUseCase $createStylistProfileUseCase,
+        CreateStylistProfileUseCase $createStylistProfileUseCase,
         CreateStylistProfileResponder $responder
     ) {
         $createStylistProfileUseCase(

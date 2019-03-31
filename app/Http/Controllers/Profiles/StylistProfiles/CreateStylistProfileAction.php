@@ -7,7 +7,7 @@ use App\Domains\Models\Profile\Sex;
 use App\Http\Controllers\Controller;
 use App\Domains\Models\Profile\BirthDate;
 use App\Http\Requests\Accounts\StylistProfiles\CreateStylistProfileRequest;
-use App\Domains\UseCases\Accounts\StylistProfiles\ICreateStylistProfileUseCase;
+use App\Domains\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
 use App\Http\Responders\Profiles\StylistProfiles\CreateStylistProfileResponder;
 
 class CreateStylistProfileAction extends Controller
@@ -32,7 +32,7 @@ class CreateStylistProfileAction extends Controller
      */
     public function __invoke(
         CreateStylistProfileRequest $request,
-        ICreateStylistProfileUseCase $createStylistProfileUseCase,
+        CreateStylistProfileUseCase $createStylistProfileUseCase,
         CreateStylistProfileResponder $responder
     ) {
         $birthDate = new BirthDate($request->birth_date);

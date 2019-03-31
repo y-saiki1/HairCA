@@ -8,10 +8,10 @@ use App\Domains\Repositories\Accounts\AccountQuery;
 use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
 use App\Domains\Repositories\Accounts\Stylists\StylistCommand;
 
-use App\Domains\UseCases\Accounts\Stylists\ICreateStylistUseCase;
+use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
 use App\Domains\Models\Account\Account;
 
-class CreateStylistInteractor implements ICreateStylistUseCase
+class CreateStylistInteractor implements CreateStylistUseCase
 {
     /**
      * @var AccountQuery

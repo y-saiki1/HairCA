@@ -4,7 +4,7 @@ namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Account\Account;
 
-interface IAuthenticateInvitationUseCase
+interface AuthenticateInvitationUseCase
 {
     /**
      * 招待認証機能。

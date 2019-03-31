@@ -12,9 +12,9 @@ use App\Domains\Repositories\Accounts\Stylists\StylistQuery;
 use App\Domains\Repositories\Accounts\AccountQuery;
 
 use App\Domains\UseCases\Mailers\MailerCommand;
-use App\Domains\UseCases\Accounts\Stylists\IInviteStylistUseCase;
+use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
 
-class InviteStylistInteractor implements IInviteStylistUseCase
+class InviteStylistInteractor implements InviteStylistUseCase
 {
     /**
      * @var MailerCommand メール操作
@@ -56,7 +56,7 @@ class InviteStylistInteractor implements IInviteStylistUseCase
     public function __invoke(string $emailAddress, string $recommendation): string 
     {
         $stylist = $this->accountQuery->myAccount();
-        if (! $stylist->isStylist()) throw new NotStylistException('Only Stylist Account can send a invitation mail', NotStylistException::ERROR_CODE);
+        if (! $stylist->isStylist()) throw new NotStylistException('Only Stylist Account can send a invitation mail', NotStylistException::ERROR_CODE); 
 
         $guest = $stylist->inviteGuest($emailAddress, $recommendation);
 

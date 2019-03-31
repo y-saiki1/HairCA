@@ -45,7 +45,7 @@ class EloquentMemberCommand implements MemberCommand
      */
     public function saveMember(string $name, string $emailAddress, string $password): bool
     {
-        $user = $this->eloquentAccount->firstOrNew(
+        $member = $this->eloquentAccount->firstOrNew(
             [
                 'email'     => $emailAddress,
                 'password'  => $this->accountPasswordHasher->make($password),
@@ -56,11 +56,11 @@ class EloquentMemberCommand implements MemberCommand
             ]
         );
 
-        if (! $user->wasRecentlyCreated) {
-            $user->role_id = Member::ACCOUNT_TYPE;
-            $user->updated_at = Carbon::now();
+        if (! $member->wasRecentlyCreated) {
+            $member->role_id = Member::ACCOUNT_TYPE;
+            $member->updated_at = Carbon::now();
         }
         
-        return $user->save();
+        return $member->save();
     }
 }
