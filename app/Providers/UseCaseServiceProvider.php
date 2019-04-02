@@ -13,8 +13,8 @@ use Packages\Interactors\Accounts\Stylists\AuthenticateInvitationInteractor;
 use Packages\Domain\UseCases\Accounts\Stylists\AuthenticateInvitationUseCase;
 use Packages\Interactors\Accounts\Stylists\CreateStylistInteractor;
 
-use Packages\Domain\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
-use Packages\Interactors\Accounts\StylistProfiles\CreateStylistProfileInteractor;
+use Packages\Domain\UseCases\Profiles\StylistProfiles\CreateStylistProfileUseCase;
+use Packages\Interactors\Profiles\StylistProfiles\CreateStylistProfileInteractor;
 
 
 use Packages\Domain\UseCases\Accounts\Stylists\InviteStylistUseCase;

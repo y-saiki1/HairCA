@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Packages\Domain\Models\Profile\Sex;
 use App\Http\Controllers\Controller;
 use Packages\Domain\Models\Profile\BirthDate;
-use App\Http\Requests\Accounts\StylistProfiles\CreateStylistProfileRequest;
-use Packages\Domain\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
+use App\Http\Requests\Profiles\StylistProfiles\CreateStylistProfileRequest;
+use Packages\Domain\UseCases\Profiles\StylistProfiles\CreateStylistProfileUseCase;
 use App\Http\Responders\Profiles\StylistProfiles\CreateStylistProfileResponder;
 
 class CreateStylistProfileAction extends Controller

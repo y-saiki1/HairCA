@@ -2,7 +2,7 @@
 
 namespace App\Rules\Accounts\Profiles;
 
-use App\Domains\Models\Profile\Sex;
+use Packages\Domain\Models\Profile\Sex;
 use Illuminate\Contracts\Validation\Rule;
 
 class ExistsSex implements Rule

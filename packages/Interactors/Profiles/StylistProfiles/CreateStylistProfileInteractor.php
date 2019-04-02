@@ -1,6 +1,6 @@
 <?php
 
-namespace Packages\Interactors\Accounts\StylistProfiles;
+namespace Packages\Interactors\Profiles\StylistProfiles;
 
 use Packages\Domain\Exceptions\NotStylistException;
 
@@ -11,7 +11,7 @@ use Packages\Domain\Repositories\Accounts\Stylists\StylistCommand;
 use Packages\Domain\Repositories\Accounts\Stylists\StylistQuery;
 use Packages\Domain\Repositories\Accounts\AccountQuery;
 
-use Packages\Domain\UseCases\Accounts\StylistProfiles\CreateStylistProfileUseCase;
+use Packages\Domain\UseCases\Profiles\StylistProfiles\CreateStylistProfileUseCase;
 
 class CreateStylistProfileInteractor implements CreateStylistProfileUseCase
 {

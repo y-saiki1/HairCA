@@ -1,6 +1,6 @@
 <?php
 
-namespace Packages\Domain\UseCases\Accounts\StylistProfiles;
+namespace Packages\Domain\UseCases\Profiles\StylistProfiles;
 
 use Packages\Domain\Exceptions\NotStylistException;
 

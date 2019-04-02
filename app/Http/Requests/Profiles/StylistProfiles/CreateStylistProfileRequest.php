@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Accounts\StylistProfiles;
+namespace App\Http\Requests\Profiles\StylistProfiles;
 
 use App\Rules\Accounts\Profiles\ExistsSex;
 use Illuminate\Foundation\Http\FormRequest;

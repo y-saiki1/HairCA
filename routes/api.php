@@ -48,4 +48,9 @@ Route::middleware(['api', 'auth:api'])->group(function () {
     Route::namespace('Profiles\\StylistProfiles')->group(function () {
         Route::post('/accounts/stylists/profiles', CreateStylistProfileAction::class);
     });
+
+    // StyleBook
+    // Route::namespace(StyleBooks)->group(function () {
+    //     Route::post('/accounts/stylists/profiles', CreateStylistProfileAction::class);
+    // });
 });
