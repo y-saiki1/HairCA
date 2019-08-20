@@ -33,7 +33,7 @@ Route::middleware(['api'])->group(function () {
     // Member
     Route::namespace('Accounts\\Members')->group(function () {
         Route::post('/accounts/members', CreateMemberAction::class);
-        Route::post('/accounts/members/memberToStylist', UpdateMemberToStylistAction::class);
+        Route::post('/accounts/members/to-stylist', UpdateMemberToStylistAction::class);
     });
 });
 
@@ -50,7 +50,7 @@ Route::middleware(['api', 'auth:api'])->group(function () {
     });
 
     // StyleBook
-    // Route::namespace(StyleBooks)->group(function () {
-    //     Route::post('/accounts/stylists/profiles', CreateStylistProfileAction::class);
-    // });
+    Route::namespace('StyleBooks')->group(function () {
+        Route::post('/accounts/stylists/stylebooks', CreateStyleBookAction::class);
+    });
 });

@@ -38,13 +38,13 @@ class CreateStyleBookRequest extends FormRequest
             // StyleModel 既存のものを使う・新しい物を作る
             "style_model.age" => "required_without:style_model_id",
             "style_model.sex" => "required_without:style_model_id",
-            "style_model.face_type_id" => "required_without:style_model_id",
-            "style_model.hair_type_id" => "required_without:style_model_id",
-            "style_model.hair_bold_type_id"   => "required_without:style_model_id",
-            "style_model.hair_amount_type_id" => "required_without:style_model_id",
+            "style_model.face_type_id" => "required_without:style_model_id|integer",
+            "style_model.hair_type_id" => "required_without:style_model_id|integer",
+            "style_model.hair_bold_type_id"   => "required_without:style_model_id|integer",
+            "style_model.hair_amount_type_id" => "required_without:style_model_id|integer",
 
             // StyleModel既存選択の場合
-            "style_model_id" => "required_without_all:age,sex,face_type_id,hair_type_id,hair_bold_type_id,hair_amount_type_id",
+            "style_model_id" => "required_without_all:style_model.age,style_model.sex,style_model.face_type_id,style_model.hair_type_id,style_model.hair_bold_type_id,style_model.hair_amount_type_id",
         ];
     }
 }

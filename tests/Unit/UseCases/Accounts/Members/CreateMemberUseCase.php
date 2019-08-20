@@ -15,11 +15,4 @@ class InviteAccountTest extends TestCase
     {   
         parent::setUp();
     }
-
-    /**
-     * @test
-     */
-    public function run ()
-    {
-    }
 }

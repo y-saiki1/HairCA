@@ -2,12 +2,12 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
-use App\Infrastructures\Entities\Eloquents\EloquentRole;
-use App\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
-use App\Infrastructures\Entities\Eloquents\EloquentHairSalon;
-use App\Infrastructures\Entities\Eloquents\EloquentRecommender;
-use App\Infrastructures\Entities\Eloquents\EloquentBase;
+use Packages\Infrastructures\Entities\Eloquents\EloquentAccounts\EloquentAccount;
+use Packages\Infrastructures\Entities\Eloquents\EloquentRole;
+use Packages\Infrastructures\Entities\Eloquents\EloquentStylistProfile;
+use Packages\Infrastructures\Entities\Eloquents\EloquentHairSalon;
+use Packages\Infrastructures\Entities\Eloquents\EloquentRecommender;
+use Packages\Infrastructures\Entities\Eloquents\EloquentBase;
 use Illuminate\Contracts\Hashing\Hasher;
 
 class UserSeeder extends Seeder

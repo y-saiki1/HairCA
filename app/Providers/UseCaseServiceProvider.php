@@ -20,6 +20,9 @@ use Packages\Interactors\Profiles\StylistProfiles\CreateStylistProfileInteractor
 use Packages\Domain\UseCases\Accounts\Stylists\InviteStylistUseCase;
 use Packages\Interactors\Accounts\Stylists\InviteStylistInteractor;
 
+use Packages\Domain\UseCases\StyleBooks\CreateStyleBookUseCase;
+use Packages\Interactors\StyleBooks\CreateStyleBookInteractor;
+
 class UseCaseServiceProvider extends ServiceProvider
 {
     /**
@@ -44,5 +47,6 @@ class UseCaseServiceProvider extends ServiceProvider
         $this->app->bind(CreateStylistUseCase::class, CreateStylistInteractor::class);
         $this->app->bind(CreateStylistProfileUseCase::class, CreateStylistProfileInteractor::class);
         $this->app->bind(InviteStylistUseCase::class, InviteStylistInteractor::class);
+        $this->app->bind(CreateStyleBookUseCase::class, CreateStyleBookInteractor::class);
     }
 }
